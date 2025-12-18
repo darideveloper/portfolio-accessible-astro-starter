@@ -3,9 +3,9 @@
   interpolate-size: allow-keywords;
 
   // brand colors (change these to your own brand colors)
-  --brand-primary: #d648ff;
-  --brand-secondary: #00d1b7;
-  --brand-neutral: #b9bec4;
+  --brand-primary: #00f5ff; // neon blue
+  --brand-secondary: #1f51ff; // logo highlight
+  --brand-neutral: #c7c7c7; // logo text color
 
   // pallet brand
   --color-primary-100: oklch(from var(--brand-primary) 90% c h);
@@ -28,7 +28,7 @@
   --color-neutral-600: oklch(from var(--brand-neutral) 60% c h);
   --color-neutral-700: oklch(from var(--brand-neutral) 40% c h);
   --color-neutral-800: oklch(from var(--brand-neutral) 30% c h);
-  --color-neutral-900: oklch(from var(--brand-neutral) 15% c h);
+  --color-neutral-900: #252525; // logo background color
 
   // color scheme
   --foreground-color: light-dark(var(--color-neutral-800), var(--color-neutral-100));
@@ -139,9 +139,9 @@
   --backdrop-blur: blur(3px);
 
   // kbd
-  --kbd-color-text: light-dark(var(--color-gray-200), var(--color-gray-800));
-  --kbd-color-border: light-dark(var(--color-gray-700), var(--color-gray-300));
-  --kbd-color-background: light-dark(var(--color-gray-1000), var(--color-gray-200));
+  --kbd-color-text: light-dark(var(--color-neutral-800), var(--color-neutral-200));
+  --kbd-color-border: light-dark(var(--color-neutral-700), var(--color-neutral-300));
+  --kbd-color-background: light-dark(var(--color-neutral-900), var(--color-neutral-200));
 }
 
 // dark color scheme overrides
