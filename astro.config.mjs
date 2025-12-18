@@ -19,7 +19,7 @@ const viteConfig = {
     preprocessorOptions: {
       scss: {
         logger: {
-          warn: () => {},
+          warn: () => { },
         },
       },
     },
@@ -87,7 +87,7 @@ if (isLinked) {
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
-  site: 'https://accessible-astro-starter.incluud.dev',
+  site: 'https://software3s.com',
   integrations: [compress(), icon(), mdx(), sitemap()],
   vite: viteConfig,
 })
