@@ -15,7 +15,7 @@ interface Props {
   src?: string
 }
 
-const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
+const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: Props = Astro.props
 ---
 
 <section class='hero my-24'>
@@ -26,9 +26,9 @@ const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
           <slot>
             Your problem, our
             <span class='text-gradient-wrapper relative inline-block'>
-              <span class='text-gradient text-animate-smooth opacity-100 transition-opacity duration-600'>smooth✔</span>
+              <span class='text-gradient text-animate-smooth opacity-100 transition-all duration-600'>smooth✔</span>
               <span
-                class='text-gradient text-animate-software absolute top-0 left-0 z-10 opacity-0 transition-opacity duration-600'
+                class='text-gradient text-animate-software absolute top-0 left-0 z-10 opacity-0 transition-all duration-600'
                 >software</span
               >
             </span>solution
@@ -66,7 +66,7 @@ const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
         </div>
       </div>
       <Image
-        class='hidden lg:block'
+        class='image-animate-zoom hidden scale-100 transition-all duration-600 lg:block'
         src={src}
         alt=''
         decoding='async'
@@ -96,26 +96,50 @@ const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
 </style>
 
 <script>
-  // Load script after page loads
-  document.addEventListener('DOMContentLoaded', () => {
-    // Detect when user start scrolling
-    window.addEventListener('scroll', () => {
-      // change text "smooth" to "software" if scroll is greater than 50px
-      const textSmooth = document.querySelector('.text-animate-smooth')
-      const textSoftware = document.querySelector('.text-animate-software')
-      if (textSmooth && textSoftware) {
-        if (window.scrollY < 50) {
-          textSmooth.classList.remove('opacity-0')
-          textSmooth.classList.add('opacity-100')
-          textSoftware.classList.remove('opacity-100')
-          textSoftware.classList.add('opacity-0')
-        } else {
-          textSmooth.classList.add('opacity-0')
-          textSmooth.classList.remove('opacity-100')
-          textSoftware.classList.add('opacity-100')
-          textSoftware.classList.remove('opacity-0')
-        }
-      }
-    })
+  import { gsap } from 'gsap'
+
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  // Zoom image when scroll down
+  gsap.to('.image-animate-zoom', {
+    translateX: 100,
+    opacity: 0,
+    duration: 2,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: '.image-animate-zoom',
+      start: 'top 5%',
+      end: 'bottom bottom',
+      scrub: true,
+      markers: import.meta.env.MODE === 'development',
+    },
+  })
+
+  // Reveal text "smooth" and "software" when scroll down
+  gsap.to('.text-animate-smooth', {
+    opacity: 0,
+    duration: 2,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: '.text-animate-smooth',
+      start: 'top 20%',
+      end: 'bottom bottom',
+      scrub: true,
+      markers: import.meta.env.MODE === 'development',
+    },
+  })
+  gsap.to('.text-animate-software', {
+    opacity: 1,
+    duration: 2,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: '.text-animate-software',
+      start: 'top 20%',
+      end: 'bottom bottom',
+      scrub: true,
+      markers: import.meta.env.MODE === 'development',
+    },
   })
 </script>
