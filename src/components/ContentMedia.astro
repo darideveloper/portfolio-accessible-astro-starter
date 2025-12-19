@@ -15,23 +15,20 @@ interface Props {
    * Whether to display the image on the right side instead of the left
    * @default false
    */
-  id: string
+  class?: string
   reverseImg?: boolean
 }
 
-const { imgSrc, reverseImg = false, id }: Props = Astro.props
+const { imgSrc, reverseImg = false, class: className }: Props = Astro.props
 ---
 
-<section
-  class='my-64'
-  id={id}
->
+<section class={`my-64 ${className}`}>
   <div class='container'>
     <div class='grid grid-cols-1 gap-24 md:grid-cols-2'>
       {
         !reverseImg ? (
           <Media
-            class='rounded-lg'
+            class='img-wrapper rounded-lg transition-all'
             src={imgSrc}
           />
         ) : (
@@ -44,7 +41,7 @@ const { imgSrc, reverseImg = false, id }: Props = Astro.props
       {
         reverseImg ? (
           <Media
-            class='rounded-lg'
+            class='img-wrapper rounded-lg transition-all'
             src={imgSrc}
           />
         ) : (
