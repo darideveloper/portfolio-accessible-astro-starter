@@ -13,9 +13,14 @@ interface Props {
    * The source URL for the image
    */
   src?: string
+  animationsClasses: {
+    smooth: string
+    software: string
+    image: string
+  }
 }
 
-const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: Props = Astro.props
+const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg', animationsClasses }: Props = Astro.props
 
 import { whatsappLink } from '../lib/constants/contact'
 ---
@@ -28,9 +33,11 @@ import { whatsappLink } from '../lib/constants/contact'
           <slot>
             Your problem, our
             <span class='text-gradient-wrapper relative inline-block'>
-              <span class='text-gradient text-animate-smooth opacity-100 transition-all duration-600'>smooth✔</span>
+              <span class={`text-gradient opacity-100 transition-all duration-600 ${animationsClasses.smooth}`}
+                >smooth✔</span
+              >
               <span
-                class='text-gradient text-animate-software absolute top-0 left-0 z-10 opacity-0 transition-all duration-600'
+                class={`text-gradient absolute top-0 left-0 z-10 opacity-0 transition-all duration-600 ${animationsClasses.software}`}
                 >software</span
               >
             </span>solution
@@ -68,7 +75,7 @@ import { whatsappLink } from '../lib/constants/contact'
         </div>
       </div>
       <Image
-        class='image-animate-zoom hidden scale-100 transition-all duration-600 lg:block'
+        class={`hidden scale-100 transition-all duration-600 lg:block ${animationsClasses.image}`}
         src={src}
         alt=''
         decoding='async'
@@ -96,52 +103,3 @@ import { whatsappLink } from '../lib/constants/contact'
     -webkit-text-fill-color: transparent;
   }
 </style>
-
-<script>
-  import { gsap } from 'gsap'
-
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-  gsap.registerPlugin(ScrollTrigger)
-
-  // Zoom image when scroll down
-  gsap.to('.image-animate-zoom', {
-    translateX: 100,
-    opacity: 0,
-    duration: 2,
-    ease: 'power2.inOut',
-    scrollTrigger: {
-      trigger: '.image-animate-zoom',
-      start: 'top 5%',
-      end: 'bottom bottom',
-      scrub: true,
-      markers: import.meta.env.MODE === 'development',
-    },
-  })
-
-  // Reveal text "smooth" and "software" when scroll down
-  gsap.to('.text-animate-smooth', {
-    opacity: 0,
-    duration: 2,
-    ease: 'power2.inOut',
-    scrollTrigger: {
-      trigger: '.text-animate-smooth',
-      start: 'top 15%',
-      end: 'bottom bottom',
-      scrub: true,
-      markers: import.meta.env.MODE === 'development',
-    },
-  })
-  gsap.to('.text-animate-software', {
-    opacity: 1,
-    duration: 2,
-    ease: 'power2.inOut',
-    scrollTrigger: {
-      trigger: '.text-animate-software',
-      start: 'top 15%',
-      end: 'bottom bottom',
-      scrub: true,
-      markers: import.meta.env.MODE === 'development',
-    },
-  })
-</script>

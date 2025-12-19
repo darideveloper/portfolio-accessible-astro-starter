@@ -8,10 +8,23 @@ import FeaturedProjects from '@components/FeaturedProjects.astro'
 import FeaturedPosts from '@components/FeaturedPosts.astro'
 import { Accordion, AccordionItem, Avatar, AvatarGroup, Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
+
+// Animations identifiers
+const animationsClasses = {
+  hero: {
+    smooth: 'hero-text-animate-smooth',
+    software: 'hero-text-animate-software',
+    image: 'hero-image-animate-hero',
+  },
+  'content-media': {
+    image1: 'content-media-image-animate-content-media-1',
+    image2: 'content-media-image-animate-content-media-2',
+  },
+}
 ---
 
 <DefaultLayout title='Home'>
-  <Hero />
+  <Hero animationsClasses={animationsClasses.hero} />
   <!-- <ContentMedia imgSrc='/accessible-components.webp'>
     <Heading level='h2'>Software que fluye con el ritmo de tu negocio</Heading>
     <p class='text-2xl'>
@@ -23,7 +36,10 @@ import { Icon } from 'astro-icon/components'
       >. They'll get you up and running in building an accessible solution for your visitors.
     </p>
   </ContentMedia> -->
-  <ContentMedia imgSrc='/desarrollo-dashboards-ecommerce-medida-smooth-software.svg'>
+  <ContentMedia
+    imgSrc='/desarrollo-dashboards-ecommerce-medida-smooth-software.svg'
+    id='content-media-1'
+  >
     <Heading level='h2'>Software que fluye con el ritmo de tu negocio</Heading>
     <p class='text-2xl'>
       Diseñamos <strong>dashboards</strong>, <strong>web apps personalizadas</strong> y <strong>e-commerce</strong> de alto
@@ -34,6 +50,7 @@ import { Icon } from 'astro-icon/components'
   <ContentMedia
     imgSrc='/automatizacion-procesos-ia-apps-estrategia.svg'
     reverseImg={true}
+    id='content-media-2'
   >
     <Heading level='h2'>IA avanzada con visión humana</Heading>
     <p class='text-2xl'>
@@ -297,3 +314,62 @@ import { Icon } from 'astro-icon/components'
     padding: var(--space-s);
   }
 </style>
+
+<!-- Sent animations identifiers to the window object -->
+<script is:inline define:vars={{ animationsClasses }}>
+  window.animationsClasses = animationsClasses
+</script>
+
+<!-- Page animations -->
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const animationsClasses = (window as any).animationsClasses
+
+  // ---- Hero ----
+
+  // Zoom image when scroll down
+  gsap.to(`.${animationsClasses.hero.image}`, {
+    translateX: 100,
+    opacity: 0,
+    duration: 2,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: `.${animationsClasses.hero.image}`,
+      start: 'top 5%',
+      end: 'bottom bottom',
+      scrub: true,
+      markers: import.meta.env.MODE === 'development',
+    },
+  })
+
+  // Reveal text "smooth" and "software" when scroll down
+  gsap.to(`.${animationsClasses.hero.smooth}`, {
+    opacity: 0,
+    duration: 2,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: `.${animationsClasses.hero.smooth}`,
+      start: 'top 15%',
+      end: 'bottom bottom',
+      scrub: true,
+      markers: import.meta.env.MODE === 'development',
+    },
+  })
+
+  gsap.to(`.${animationsClasses.hero.software}`, {
+    opacity: 1,
+    duration: 2,
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: `.${animationsClasses.hero.software}`,
+      start: 'top 15%',
+      end: 'bottom bottom',
+      scrub: true,
+      markers: import.meta.env.MODE === 'development',
+    },
+  })
+</script>
