@@ -62,7 +62,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.5.1",
     "@tailwindcss/vite": "^4.1.13",
-    "accessible-astro-components": "^5.0.1"
+    "accessible-astro-components": "^5.0.1",
+    "gsap": "^3.14.2"
   },
   "engines": {
     "node": ">=20.3.0"
