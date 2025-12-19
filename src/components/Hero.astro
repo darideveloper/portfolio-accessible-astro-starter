@@ -16,6 +16,8 @@ interface Props {
 }
 
 const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: Props = Astro.props
+
+import { whatsappLink } from '../lib/constants/contact'
 ---
 
 <section class='hero my-24'>
@@ -34,9 +36,9 @@ const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: P
             </span>solution
           </slot>
         </h1>
-        <div class='flex flex-col gap-3 min-[500px]:flex-row'>
+        <div class='flex flex-col items-center gap-3 min-[500px]:flex-row md:items-start'>
           <Link
-            href='https://github.com/incluud/accessible-astro-starter'
+            href={whatsappLink}
             isButton
             type='primary'
             animateOnHover6566
@@ -44,13 +46,13 @@ const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: P
           >
             <Icon
               aria-hidden='true'
-              name='lucide:star'
+              name='lucide:phone'
               size='1.5rem'
             />
             Contáctanos
           </Link>
           <Link
-            href='https://accessible-astro.incluud.dev/'
+            href='/quote/'
             isButton
             type='secondary'
             animateOnHover
@@ -58,10 +60,10 @@ const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: P
           >
             <Icon
               aria-hidden='true'
-              name='lucide:bookmark'
+              name='lucide:dollar-sign'
               size='1.5rem'
             />
-            Read the docs
+            Cotiza tu proyecto
           </Link>
         </div>
       </div>
@@ -124,7 +126,7 @@ const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: P
     ease: 'power2.inOut',
     scrollTrigger: {
       trigger: '.text-animate-smooth',
-      start: 'top 20%',
+      start: 'top 15%',
       end: 'bottom bottom',
       scrub: true,
       markers: import.meta.env.MODE === 'development',
@@ -136,7 +138,7 @@ const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg' }: P
     ease: 'power2.inOut',
     scrollTrigger: {
       trigger: '.text-animate-software',
-      start: 'top 20%',
+      start: 'top 15%',
       end: 'bottom bottom',
       scrub: true,
       markers: import.meta.env.MODE === 'development',
