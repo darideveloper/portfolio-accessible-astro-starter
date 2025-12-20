@@ -369,25 +369,19 @@ const animationsClasses = {
   })
 
   // ---- Content Media ----
-  gsap.to(`.${animationsClasses.contentMedia.image1} .img-wrapper`, {
-    scale: 1.3,
-    scrollTrigger: {
-      trigger: `.${animationsClasses.contentMedia.image1} .img-wrapper`,
-      start: 'top center',
-      end: 'bottom center',
-      scrub: 2,
-      markers: import.meta.env.MODE === 'development',
-    },
-  })
 
-  gsap.to(`.${animationsClasses.contentMedia.image2} .img-wrapper`, {
-    scale: 1.2,
-    scrollTrigger: {
-      trigger: `.${animationsClasses.contentMedia.image2} .img-wrapper`,
-      start: 'top center',
-      end: 'bottom center',
-      scrub: 2,
-      markers: import.meta.env.MODE === 'development',
-    },
+  // Zoom image when scroll down
+  const contentMediaClasses = [animationsClasses.contentMedia.image1, animationsClasses.contentMedia.image2]
+  contentMediaClasses.forEach((className) => {
+    gsap.to(`.${className} .img-wrapper`, {
+      scale: 1.3,
+      scrollTrigger: {
+        trigger: `.${className} .img-wrapper`,
+        start: 'top center',
+        end: 'bottom center',
+        scrub: 2,
+        markers: import.meta.env.MODE === 'development',
+      },
+    })
   })
 </script>
