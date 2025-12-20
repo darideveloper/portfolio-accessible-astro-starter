@@ -30,7 +30,7 @@ interface Props {
   title?: string
 }
 
-const { class: className, limit = 3, title = 'Featured projects' } = Astro.props
+const { class: className, limit = 3, title = 'Proyectos destacados' } = Astro.props
 
 // Get projects from content collection
 const projects = await getCollection('projects')
@@ -44,15 +44,19 @@ const featuredProjects = projects.slice(0, limit).map((project, index) => ({
 ---
 
 <section class:list={[className, 'my-64']}>
-  <div class="container">
-    <Heading level="h2" class="mb-6">{title}</Heading>
-    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+  <div class='container'>
+    <Heading
+      level='h2'
+      class='mb-6'
+      >{title}</Heading
+    >
+    <div class='grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
       {
         featuredProjects.map((project) => (
           <Card
             imageComponent={project.featuredImage}
             url={'/portfolio/' + project.id}
-            headingLevel="h2"
+            headingLevel='h2'
             title={project.data.title}
             footer={'Author: ' + project.data.author}
           >
@@ -61,10 +65,19 @@ const featuredProjects = projects.slice(0, limit).map((project, index) => ({
         ))
       }
     </div>
-    <div class="mt-12">
-      <Link href="/portfolio/" isButton animateOnHover animationType="nudge">
-        View all projects
-        <Icon aria-hidden="true" name="lucide:arrow-right" size="1.5rem" />
+    <div class='mt-12'>
+      <Link
+        href='/portfolio/'
+        isButton
+        animateOnHover
+        animationType='nudge'
+      >
+        Ver todos los proyectos
+        <Icon
+          aria-hidden='true'
+          name='lucide:arrow-right'
+          size='1.5rem'
+        />
       </Link>
     </div>
   </div>
