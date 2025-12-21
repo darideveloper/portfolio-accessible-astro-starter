@@ -1,0 +1,87 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import { Heading } from 'accessible-astro-components'
+---
+
+<DefaultLayout title="Política de Privacidad">
+  <PageHeader
+    title="Política de Privacidad"
+    subtitle="Información sobre cómo recopilamos, utilizamos y protegemos tus datos personales."
+    bgType="bordered"
+  />
+  <section class="narrow container my-16">
+    <div class="space-content">
+      <Heading level="h2">Introducción</Heading>
+      <p>
+        En <strong>Smooth Software Solutions (3S)</strong>, nos comprometemos a proteger tu privacidad y garantizar la seguridad de tus datos personales. Esta política de privacidad explica cómo recopilamos, utilizamos, almacenamos y protegemos tu información cuando visitas nuestro sitio web o utilizas nuestros servicios.
+      </p>
+
+      <Heading level="h2">Datos que recopilamos</Heading>
+      <p>Recopilamos los siguientes tipos de información:</p>
+      <ul class="list-inside list-disc">
+        <li><strong>Información de contacto:</strong> Nombre, dirección de correo electrónico, número de teléfono</li>
+        <li><strong>Información técnica:</strong> Dirección IP, tipo de navegador, sistema operativo</li>
+        <li><strong>Información de uso:</strong> Páginas visitadas, tiempo de permanencia, enlaces clicados</li>
+        <li><strong>Cookies:</strong> Datos de navegación y preferencias (ver nuestra política de cookies)</li>
+      </ul>
+
+      <Heading level="h2">Cómo utilizamos tus datos</Heading>
+      <p>Utilizamos tus datos personales para:</p>
+      <ul class="list-inside list-disc">
+        <li>Responder a tus consultas y solicitudes de información</li>
+        <li>Proporcionar y mejorar nuestros servicios</li>
+        <li>Enviar comunicaciones relacionadas con nuestros servicios (con tu consentimiento)</li>
+        <li>Cumplir con obligaciones legales y regulatorias</li>
+        <li>Analizar el uso del sitio web para mejorar la experiencia del usuario</li>
+      </ul>
+
+      <Heading level="h2">Protección de datos</Heading>
+      <p>
+        Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger tus datos personales contra acceso no autorizado, pérdida, destrucción o alteración. Sin embargo, ningún método de transmisión por Internet es 100% seguro.
+      </p>
+
+      <Heading level="h2">Compartir información</Heading>
+      <p>
+        No vendemos, alquilamos ni compartimos tus datos personales con terceros, excepto en los siguientes casos:
+      </p>
+      <ul class="list-inside list-disc">
+        <li>Cuando sea necesario para proporcionar nuestros servicios</li>
+        <li>Cuando sea requerido por ley o por orden judicial</li>
+        <li>Con proveedores de servicios de confianza que nos ayudan a operar nuestro negocio (bajo acuerdos de confidencialidad)</li>
+      </ul>
+
+      <Heading level="h2">Tus derechos</Heading>
+      <p>Tienes derecho a:</p>
+      <ul class="list-inside list-disc">
+        <li>Acceder a tus datos personales</li>
+        <li>Rectificar datos inexactos o incompletos</li>
+        <li>Solicitar la eliminación de tus datos</li>
+        <li>Oponerte al procesamiento de tus datos</li>
+        <li>Solicitar la portabilidad de tus datos</li>
+        <li>Retirar tu consentimiento en cualquier momento</li>
+      </ul>
+
+      <Heading level="h2">Cookies</Heading>
+      <p>
+        Utilizamos cookies para mejorar tu experiencia en nuestro sitio web. Para más información, consulta nuestra <a href="/configuracion-cookies">Configuración de Cookies</a>.
+      </p>
+
+      <Heading level="h2">Contacto</Heading>
+      <p>
+        Si tienes preguntas sobre esta política de privacidad o deseas ejercer tus derechos, puedes contactarnos a través de nuestro <a href="/contact">formulario de contacto</a> o por correo electrónico a <strong>contact@software3s.com</strong>.
+      </p>
+
+      <Heading level="h2">Cambios en esta política</Heading>
+      <p>
+        Nos reservamos el derecho de actualizar esta política de privacidad en cualquier momento. Te notificaremos sobre cambios significativos publicando la nueva política en esta página con una fecha de actualización revisada.
+      </p>
+
+      <Heading level="h2">Información de publicación</Heading>
+      <p>
+        Esta política de privacidad fue preparada el <strong>{new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</strong> y entró en vigor en esa fecha.
+      </p>
+    </div>
+  </section>
+</DefaultLayout>
+

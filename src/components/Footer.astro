@@ -1,7 +1,11 @@
 ---
+// Components
 import CallToAction from './CallToAction.astro'
 import Logo from './Logo.astro'
 import { Heading, Link } from 'accessible-astro-components'
+
+// Data
+import { phoneClean } from '../lib/constants/contact'
 
 /**
  * Footer Component
@@ -9,91 +13,156 @@ import { Heading, Link } from 'accessible-astro-components'
  * @description A component that displays the footer of the website
  */
 const currentYear = new Date().getFullYear()
+
+// Helper function to create WhatsApp links with context
+const createWhatsAppLink = (message: string) => {
+  const phone = phoneClean.replace('+52', '521')
+  const encodedMessage = encodeURIComponent(message)
+  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`
+}
 ---
 
 <footer>
   <CallToAction />
-  <section class="py-20">
-    <Heading level="h2" class="sr-only">Footer</Heading>
-    <div class="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-      <div class="flex flex-col gap-4">
-        <Heading level="h3" size="h6">Theme features</Heading>
-        <ul class="flex flex-col gap-2">
-          <li><Link href="/accessibility-statement">Accessibility statement</Link></li>
-          <li><Link href="/accessible-components">Accessible components</Link></li>
-          <li><Link href="/color-contrast-checker">Color contrast checker</Link></li>
-          <li><Link href="/markdown-page">Markdown page</Link></li>
-          <li><Link href="/mdx-page">MDX page</Link></li>
-          <li><Link href="/404-page">404 page</Link></li>
-          <li><Link href="/sitemap">Sitemap</Link></li>
-        </ul>
-      </div>
-      <div class="flex flex-col gap-4">
-        <Heading level="h3" size="h6">Incluud projects</Heading>
-        <ul class="flex flex-col gap-2">
+  <section class='py-20'>
+    <Heading
+      level='h2'
+      class='sr-only'
+      >Footer</Heading
+    >
+    <div class='container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4'>
+      <div class='flex flex-col gap-4'>
+        <Heading
+          level='h3'
+          size='h6'
+          >Servicios Principales</Heading
+        >
+        <ul class='flex flex-col gap-2'>
           <li>
-            <Link isExternal href="https://accessible-astro-starter.incluud.dev">Accessible Astro Starter</Link>
-          </li>
-          <li>
-            <Link isExternal href="https://accessible-astro-dashboard.incluud.dev">Accessible Astro Dashboard</Link>
-          </li>
-          <li>
-            <Link isExternal href="https://accessible-astro-starter.incluud.dev/accessible-components"
-              >Accessible Astro Components</Link
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Desarrollo Web a medida')}
+              target='_blank'
+              >Desarrollo Web a medida</Link
             >
           </li>
           <li>
-            <Link isExternal href="https://accessible-astro-docs.incluud.dev">Accessible Astro Docs</Link>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre E-commerce y Tiendas')}
+              target='_blank'
+              >E-commerce y Tiendas</Link
+            >
           </li>
           <li>
-            <Link isExternal href="https://color-contrast.incluud.dev">Color Contrast Checker</Link>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Dashboards de Control')}
+              target='_blank'
+              >Dashboards de Control</Link
+            >
+          </li>
+          <li>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Apps Móviles')}
+              target='_blank'
+              >Apps Móviles</Link
+            >
+          </li>
+          <li>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Automatización de Procesos')}
+              target='_blank'
+              >Automatización de Procesos</Link
+            >
+          </li>
+          <li>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Consultoría Tecnológica')}
+              target='_blank'
+              >Consultoría Tecnológica</Link
+            >
           </li>
         </ul>
       </div>
-      <div class="flex flex-col gap-4">
-        <Heading level="h3" size="h6">Developer tools</Heading>
-        <ul class="flex flex-col gap-2">
+      <div class='flex flex-col gap-4'>
+        <Heading
+          level='h3'
+          size='h6'
+          >Estrategia y SEO</Heading
+        >
+        <ul class='flex flex-col gap-2'>
           <li>
-            <Link isExternal href="https://chrispederick.com/work/web-developer/">Web Developer Extension</Link>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa solicitar una Auditoría SEO Gratuita')}
+              target='_blank'
+              >Auditoría SEO Gratuita</Link
+            >
           </li>
           <li>
-            <Link isExternal href="https://accessibilityinsights.io/">Accessibility Insights</Link>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Posicionamiento en Google')}
+              target='_blank'
+              >Posicionamiento en Google</Link
+            >
           </li>
           <li>
-            <Link isExternal href="https://www.deque.com/axe/devtools/">axe DevTools</Link>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Optimización de Velocidad')}
+              target='_blank'
+              >Optimización de Velocidad</Link
+            >
           </li>
           <li>
-            <Link isExternal href="https://wave.webaim.org/extension/">WAVE Web Accessibility</Link>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Copywriting Persuasivo')}
+              target='_blank'
+              >Copywriting Persuasivo</Link
+            >
           </li>
           <li>
-            <Link isExternal href="https://www.w3.org/WAI/ARIA/apg/patterns/">ARIA Design Patterns</Link>
-          </li>
-          <li>
-            <Link isExternal href="https://aaardvarkaccessibility.com/wcag-plain-english/">WCAG Plain English</Link>
+            <Link
+              href={createWhatsAppLink('Hola, me interesa conocer más sobre Estrategia de Contenidos')}
+              target='_blank'
+              >Estrategia de Contenidos</Link
+            >
           </li>
         </ul>
       </div>
-      <div class="flex flex-col gap-4">
-        <Logo loading="lazy" />
-        <p class="leading-[1.75]">
-          Tip: always test for screen reader support. Press <kbd>⌘</kbd> + <kbd>F5</kbd> to start VoiceOver or <kbd
-            >Win</kbd
-          >
-          + <kbd>Ctrl</kbd> + <kbd>Enter</kbd> for Narrator.
+      <div class='flex flex-col gap-4'>
+        <Heading
+          level='h3'
+          size='h6'
+          >Recursos y Legal</Heading
+        >
+        <ul class='flex flex-col gap-2'>
+          <li>
+            <Link href='/#faq'>Preguntas Frecuentes</Link>
+          </li>
+          <li>
+            <Link href='/#team'>Sobre el Equipo 3S</Link>
+          </li>
+          <li>
+            <Link href='/politica-privacidad'>Política de Privacidad</Link>
+          </li>
+          <li>
+            <Link href='/aviso-legal'>Aviso Legal</Link>
+          </li>
+          <li>
+            <Link href='/configuracion-cookies'>Configuración de Cookies</Link>
+          </li>
+        </ul>
+      </div>
+      <div class='flex flex-col gap-4'>
+        <Logo loading='lazy' />
+        <p class='text-xs leading-[1.75]'>
+          Smooth Tip: El software más potente no es el más complejo, sino el que <i>mejor se adapta</i> a tu flujo de trabajo
+          diario. La IA es el motor, pero <strong>tu visión</strong> es el mapa.
         </p>
-        <p>Cute astronaut image by <Link href="https://unsplash.com/@kobbymendez">Kobby Mendez</Link> on Unsplash.</p>
       </div>
     </div>
   </section>
-  <section class="py-8">
-    <div class="container flex flex-col gap-4 md:flex-row md:justify-between">
+  <section class='py-8'>
+    <div class='container flex flex-col gap-4 md:flex-row md:justify-between'>
       <p>
-        &copy; {currentYear} - Starter Theme for <Link href="https://astro.build/">Astro</Link>.
-      </p>
-      <p>
-        Made with ❤️ by <Link href="https://github.com/markteekman">Mark Teekman</Link>. Part of <Link
-          href="https://www.incluud.dev">Incluud</Link
-        >.
+        &copy; {currentYear} - Smooth Software Solutions. Hecho con ❤️ por el equipo de 3S.
       </p>
     </div>
   </section>
