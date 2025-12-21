@@ -1,4 +1,5 @@
 ---
+// Components
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import Hero from '@components/Hero.astro'
 import Feature from '@components/Feature.astro'
@@ -8,6 +9,9 @@ import FeaturedProjects from '@components/FeaturedProjects.astro'
 import FeaturedPosts from '@components/FeaturedPosts.astro'
 import { Accordion, AccordionItem, Avatar, AvatarGroup, Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
+
+// Data
+import { whatsappLink } from '../lib/constants/contact'
 
 // Animations identifiers
 const animationsClasses = {
@@ -171,7 +175,7 @@ const animationsClasses = {
   <!-- <FeaturedPosts /> -->
 
   <!-- Team -->
-  <section class='my-64'>
+  <!-- <section class='my-64'>
     <div class='space-content container'>
       <Heading level='h2'>El cerebro detrás del código</Heading>
       <p class='text-2xl'>
@@ -223,88 +227,118 @@ const animationsClasses = {
         />
       </AvatarGroup>
     </div>
-  </section>
+  </section> -->
+
+  <!-- FAQ -->
   <section class='my-64'>
     <div class='container grid grid-cols-1 gap-12 md:grid-cols-2'>
       <div class='flex flex-col items-start gap-4'>
-        <Heading level='h2'>FAQ</Heading>
+        <Heading level='h2'>¿Tienes dudas? Nosotros tenemos las respuestas (FAQ)</Heading>
         <p class='text-2xl'>
-          This section demonstrates how to effectively use the Accordion component to organize and display frequently
-          asked questions in an accessible and user-friendly way.
+          Sabemos que delegar el software de tu negocio es una decisión importante. Aquí resolvemos las preguntas más
+          frecuentes sobre cómo trabajamos, <i>sin tecnicismos innecesarios</i>, para que tengas la seguridad de que tu
+          proyecto está en las mejores manos.
         </p>
         <Link
-          href='/faq'
+          href={whatsappLink}
           isButton
           type='primary'
           animateOnHover
           animationType='boop'
+          target='_blank'
         >
           <Icon
             aria-hidden='true'
             name='lucide:headset'
             size=' 1.5rem'
           />
-          Contact support team
+          Hablar con un experto
         </Link>
       </div>
       <div class='space-content'>
         <Accordion>
           <AccordionItem
             name='exclusive'
-            title='What is WCAG and why is it important?'
+            title='¿Cuánto tiempo tardará mi proyecto en estar listo?'
             open
           >
             <p>
-              WCAG (Web Content Accessibility Guidelines) is a set of internationally recognized standards for web
-              accessibility. Following WCAG ensures your website is usable by people with various disabilities,
-              including visual, auditory, physical, and cognitive impairments. It's important not just for
-              accessibility, but also for legal compliance, SEO, and reaching a wider audience.
+              Cada solución es única, pero nos enfocamos en la <strong>agilidad</strong>. Una landing page puede estar
+              lista en días, mientras que un software a medida depende de la complejidad. Lo que sí te garantizamos es
+              un <strong>calendario claro</strong> desde el primer día: <i>odiamos los retrasos tanto como tú</i>.
             </p>
           </AccordionItem>
+
           <AccordionItem
             name='exclusive'
-            title="What's the difference between ARIA labels and alt text?"
+            title='¿Realmente necesito un software a medida o me sirve algo genérico?'
           >
             <p>
-              Alt text is specifically for describing images to screen reader users, while ARIA labels (aria-label,
-              aria-labelledby) can describe any element on a page. Alt text is HTML's native way to provide alternative
-              text for images, while ARIA labels are part of the ARIA specification that helps make dynamic content and
-              advanced UI controls more accessible.
+              Si tu negocio tiene procesos específicos que las herramientas actuales no resuelven bien, necesitas <strong
+                >personalización</strong
+              >. El software a medida de 3S no es un gasto, es una <strong>inversión</strong> que se paga sola al eliminar
+              ineficiencias y permitirte escalar sin límites técnicos.
             </p>
           </AccordionItem>
+
           <AccordionItem
             name='exclusive'
-            title='Why is keyboard navigation important?'
+            title='¿Cómo utilizan la Inteligencia Artificial en sus desarrollos?'
           >
             <p>
-              Keyboard navigation is essential for users who can't use a mouse, including people with motor
-              disabilities, visual impairments, or those who simply prefer keyboard controls. A website should be fully
-              operable using only a keyboard, with visible focus indicators and logical tab order. This includes being
-              able to access all interactive elements and navigate through content efficiently.
+              La IA es nuestra gran aliada para <strong>acelerar procesos</strong> y reducir costes, pero nunca dejamos el
+              código en sus manos sin supervisión. Usamos tecnología avanzada para automatizar lo repetitivo, mientras nuestro
+              equipo aporta el <strong>criterio humano</strong> y la estrategia para que el resultado sea impecable.
             </p>
           </AccordionItem>
+
           <AccordionItem
             name='exclusive'
-            title='What is a sufficient color contrast ratio?'
+            title='¿Mi web estará optimizada para aparecer en Google?'
           >
             <p>
-              According to WCAG 2.2 AA standards, text should have a minimum contrast ratio of 4.5:1 against its
-              background for regular text, and 3:1 for large text (18pt or 14pt bold). For non-text elements like icons
-              or buttons, a minimum ratio of 3:1 is required. This ensures content is readable for users with visual
-              impairments or color blindness.
+              Por supuesto. No solo escribimos código fluido, sino que integramos a nuestros <strong
+                >expertos en SEO</strong
+              > desde la fase de diseño. Tu web nace con la estructura técnica necesaria para ser <strong
+                >visible</strong
+              > y atraer clientes potenciales desde el primer momento.
             </p>
           </AccordionItem>
+
           <AccordionItem
             name='exclusive'
-            title='How do I make custom components accessible?'
+            title='¿Cómo se definen los precios de los proyectos?'
           >
             <p>
-              To make custom components accessible, focus on these key aspects: use semantic HTML where possible,
-              implement proper keyboard support, add appropriate ARIA attributes, manage focus when needed, and ensure
-              adequate color contrast. Always test with screen readers and keyboard navigation. Consider using
-              established design patterns from the <Link href='https://www.w3.org/WAI/ARIA/apg/patterns/'
-                >ARIA Authoring Practices Guide</Link
-              >.
+              No creemos en presupuestos genéricos. Analizamos <strong>tus necesidades específicas</strong> y el alcance de
+              la solución para darte un precio justo. Trabajamos con presupuestos cerrados para que <i
+                >no te lleves sorpresas desagradables</i
+              > a mitad del desarrollo.
+            </p>
+          </AccordionItem>
+
+          <AccordionItem
+            name='exclusive'
+            title='¿Ustedes se encargan del hosting y el dominio?'
+          >
+            <p>
+              Podemos gestionar todo el despliegue por ti. Te asesoramos para elegir el <strong
+                >hosting más rápido y seguro</strong
+              > según tu tráfico esperado. Queremos que tu única preocupación sea ver cómo tu web <i
+                >funciona a la perfección</i
+              > desde el minuto uno.
+            </p>
+          </AccordionItem>
+
+          <AccordionItem
+            name='exclusive'
+            title='¿Qué pasa si necesito cambios o mantenimiento después del lanzamiento?'
+          >
+            <p>
+              No te dejamos solo tras la entrega. Ofrecemos planes de <strong>acompañamiento técnico</strong> para asegurar
+              que tu software evolucione con tu negocio, esté siempre actualizado y sea <strong
+                >totalmente seguro</strong
+              > ante cualquier vulnerabilidad.
             </p>
           </AccordionItem>
         </Accordion>
