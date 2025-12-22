@@ -18,7 +18,7 @@ interface Props {
 const { url = Astro.url.href } = Astro.props
 ---
 
-<ul class="flex flex-wrap gap-2">
+<ul class='flex flex-wrap gap-2'>
   <li>
     <Link
       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
@@ -26,10 +26,14 @@ const { url = Astro.url.href } = Astro.props
       isExternal
       hideIcon
       animateOnHover
-      animationType="boop"
+      animationType='boop'
     >
-      <Icon aria-hidden="true" name="lucide:facebook" size={32} />
-      <span class="sr-only">Share on Facebook, opens in a new tab</span>
+      <Icon
+        aria-hidden='true'
+        name='lucide:facebook'
+        size={32}
+      />
+      <span class='sr-only'>Compartir en Facebook, se abre en una nueva pestaña</span>
     </Link>
   </li>
   <li>
@@ -39,10 +43,14 @@ const { url = Astro.url.href } = Astro.props
       isExternal
       hideIcon
       animateOnHover
-      animationType="boop"
+      animationType='boop'
     >
-      <Icon aria-hidden="true" name="lucide:twitter" size={32} />
-      <span class="sr-only">Share on Twitter, opens in a new tab</span>
+      <Icon
+        aria-hidden='true'
+        name='lucide:twitter'
+        size={32}
+      />
+      <span class='sr-only'>Compartir en Twitter, se abre en una nueva pestaña</span>
     </Link>
   </li>
   <li>
@@ -52,10 +60,14 @@ const { url = Astro.url.href } = Astro.props
       isExternal
       hideIcon
       animateOnHover
-      animationType="boop"
+      animationType='boop'
     >
-      <Icon aria-hidden="true" name="lucide:linkedin" size={32} />
-      <span class="sr-only">Share on LinkedIn, opens in a new tab</span>
+      <Icon
+        aria-hidden='true'
+        name='lucide:linkedin'
+        size={32}
+      />
+      <span class='sr-only'>Compartir en LinkedIn, se abre en una nueva pestaña</span>
     </Link>
   </li>
 </ul>
