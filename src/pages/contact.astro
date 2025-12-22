@@ -7,6 +7,9 @@ import { Icon } from 'astro-icon/components'
 
 // Data
 import { phone, phoneClean, email } from '../lib/constants/contact'
+
+// Current host / url
+const currentHost = Astro.url.origin
 ---
 
 <DefaultLayout title='Contact'>
@@ -25,7 +28,7 @@ import { phone, phoneClean, email } from '../lib/constants/contact'
       <div class='space-content'>
         <Form
           name='contact'
-          action='/thank-you'
+          action='https://services.darideveloper.com/contact-form/'
           method='post'
         >
           <!-- Input field with custom validation message -->
@@ -122,6 +125,27 @@ import { phone, phoneClean, email } from '../lib/constants/contact'
             type='primary'
             >Solicitar propuesta gratuita</Button
           >
+
+          <input
+            type='hidden'
+            name='api_key'
+            value='aHR9zwVL5r3a8Lo6qRy2v5A'
+          />
+          <input
+            type='hidden'
+            name='user'
+            value='daridev'
+          />
+          <input
+            type='hidden'
+            name='subject'
+            value='New contact email from website'
+          />
+          <input
+            type='hidden'
+            name='redirect'
+            value={`${currentHost}/thank-you`}
+          />
         </Form>
       </div>
       <div class='space-content'>
