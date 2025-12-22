@@ -1,121 +1,226 @@
 ---
+// Components
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import { Form, Input, Button, Textarea, Checkbox, Fieldset, Heading, Link, Radio } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
+
+// Data
+import { phone, phoneClean, email } from '../lib/constants/contact'
 ---
 
-<DefaultLayout title="Contact">
-  <PageHeader title="Contact" subtitle="Have a question? Get in touch with us!" bgType="gradient" />
-  <section class="my-16">
-    <div class="container">
-      <Heading level="h2">Let's talk</Heading>
+<DefaultLayout title='Contact'>
+  <PageHeader
+    title='Hablemos de tu próximo gran paso'
+    subtitle='Cuéntame qué tienes en mente y yo te ayudaré a convertir esa idea en una <strong>solución digital fluida</strong>. No recibirás una respuesta automática genérica; recibirás una <strong>propuesta estratégica</strong> diseñada para que tu negocio <i>funcione como siempre imaginaste</i>.'
+    bgType='gradient'
+  />
+  <section class='my-16'>
+    <div class='container'>
+      <Heading level='h2'>Estás a un solo clic de simplificar tu tecnología</Heading>
     </div>
   </section>
-  <section class="container">
-    <div class="grid grid-cols-1 gap-32 md:grid-cols-2">
-      <div class="space-content">
-        <Form name="contact" action="/thank-you" method="post">
+  <section class='container'>
+    <div class='grid grid-cols-1 gap-32 md:grid-cols-2'>
+      <div class='space-content'>
+        <Form
+          name='contact'
+          action='/thank-you'
+          method='post'
+        >
           <!-- Input field with custom validation message -->
           <Input
-            name="firstname"
-            label="First name"
+            name='firstname'
+            label='Nombre completo'
             required
-            data-validation="We need your first name to address you correctly"
-            autocomplete="given-name"
+            data-validation='Necesitamos tu nombre completo para dirigirnos a ti correctamente'
+            autocomplete='given-name'
           />
 
-          <Input name="email" label="Email address" type="email" required autocomplete="email" />
+          <Input
+            name='email'
+            label='Email corporativo'
+            type='email'
+            required
+            autocomplete='email'
+          />
 
           <!-- Custom validation with pattern -->
-          <Input name="phone" label="Phone number" type="tel" required data-validation-pattern="^[0-9]{10}$" />
+          <Input
+            name='phone'
+            label='Teléfono de contacto'
+            type='tel'
+            required
+            data-validation-pattern='^[0-9]{10}$'
+          />
 
-          <Textarea name="message" label="Message" required />
+          <Textarea
+            name='message'
+            label='Cuéntanos tu desafío'
+            required
+          />
 
           <!-- Checkbox group with validation -->
           <Fieldset
-            name="interests"
-            legend="What are you interested in?"
+            name='interests'
+            legend='¿Qué solución buscas?'
             required
-            data-validation="Please select at least one area of interest"
+            data-validation='Por favor selecciona al menos una opción'
           >
-            <Checkbox name="accessibility" value="a11y" label="Accessibility and inclusive design" />
-            <Checkbox name="wcag-compliance" value="wcag" label="WCAG compliance and testing" />
-            <Checkbox name="screen-reader" value="sr" label="Screen reader optimization" />
-            <Checkbox name="keyboard-nav" value="keyboard" label="Keyboard navigation" />
+            <Checkbox
+              name='web-development'
+              value='web'
+              label='Desarrollo Web a medida'
+            />
+            <Checkbox
+              name='ecommerce'
+              value='ecommerce'
+              label='Tienda Online / E-commerce'
+            />
+            <Checkbox
+              name='dashboard'
+              value='dashboard'
+              label='Dashboard / Panel de Datos (Django)'
+            />
+            <Checkbox
+              name='seo'
+              value='seo'
+              label='Optimización SEO y Tráfico'
+            />
+            <Checkbox
+              name='automation'
+              value='automation'
+              label='Automatización de procesos'
+            />
           </Fieldset>
 
           <!-- Radio group (shared names) -->
-          <Fieldset name="experience" legend="Your experience level" required>
-            <Radio name="experience" value="beginner" label="Beginner" />
-            <Radio name="experience" value="intermediate" label="Intermediate" />
-            <Radio name="experience" value="advanced" label="Advanced" />
+          <Fieldset
+            name='project-stage'
+            legend='¿En qué fase se encuentra tu negocio?'
+            required
+          >
+            <Radio
+              name='project-stage'
+              value='initial'
+              label='Tengo una idea inicial'
+            />
+            <Radio
+              name='project-stage'
+              value='in-progress'
+              label='Proyecto en marcha (necesito mejora)'
+            />
+            <Radio
+              name='project-stage'
+              value='established'
+              label='Empresa consolidada (necesito escalar)'
+            />
           </Fieldset>
 
-          <Button htmlType="submit" type="primary">Send Message</Button>
+          <Button
+            htmlType='submit'
+            type='primary'
+            >Solicitar propuesta gratuita</Button
+          >
         </Form>
       </div>
-      <div class="space-content">
-        <Heading level="h3">Contact us</Heading>
-        <p class="text-lg">
-          Experience the power of Accessible Astro Starter's Form components! This contact form showcases our
-          comprehensive form validation system with built-in accessibility features and WCAG 2.2 compliance.
-        </p>
-        <p>
-          Our Form component includes automatic validation, proper error handling, semantic HTML structure, and screen
-          reader support. Test out the various input types, validation patterns, and interactive elements to see how
-          accessibility and usability work together seamlessly.
+      <div class='space-content'>
+        <Heading level='h3'>Conectemos para escalar</Heading>
+        <p class='text-lg'>
+          No solo buscamos clientes, buscamos socios estratégicos que quieran transformar sus procesos. Si prefieres un
+          trato más directo o tienes una duda urgente, usa cualquiera de estos canales. En 3S, la comunicación es tan
+          fluida como nuestro código, por lo que <i>siempre encontrarás a un humano al otro lado</i> listo para ayudarte.
         </p>
 
-        <div class="gap-2xs flex items-center">
-          <Icon aria-hidden="true" name="lucide:phone" size={20} class="flex-shrink-0" />
+        <div class='gap-2xs flex items-center'>
+          <Icon
+            aria-hidden='true'
+            name='lucide:phone'
+            size={20}
+            class='shrink-0'
+          />
           <p>
-            <span class="font-bold">Phone:</span>
-            <Link href="tel:+12345678900">+1 (234) 567-8900</Link>
+            <span class='font-bold'>Teléfono:</span>
+            <Link href={`tel:${phoneClean}`}>{phone}</Link>
           </p>
         </div>
 
-        <div class="gap-2xs flex items-center">
-          <Icon aria-hidden="true" name="lucide:mail" size={20} class="flex-shrink-0" />
+        <div class='gap-2xs flex items-center'>
+          <Icon
+            aria-hidden='true'
+            name='lucide:mail'
+            size={20}
+            class='shrink-0'
+          />
           <p>
-            <span class="font-bold">Email:</span>
-            <Link href="mailto:hello@accessibleastro.dev">hello@accessibleastro.dev</Link>
+            <span class='font-bold'>Correo electrónico:</span>
+            <Link href={`mailto:${email}`}>{email}</Link>
           </p>
         </div>
 
-        <div class="gap-2xs flex items-center">
-          <Icon aria-hidden="true" name="lucide:map-pin" size={20} class="flex-shrink-0" />
+        <div class='gap-2xs flex items-center'>
+          <Icon
+            aria-hidden='true'
+            name='lucide:clock'
+            size={20}
+            class='shrink-0'
+          />
           <p>
-            <span class="font-bold">Address:</span>
-            123 Accessibility Lane, Web Standards City
+            <span class='font-bold'>Horarios de atención:</span>
+            Lunes - Domingo, 9:00 AM - 6:00 PM (GMT-6)
           </p>
         </div>
 
-        <div class="gap-2xs flex items-center">
-          <Icon aria-hidden="true" name="lucide:clock" size={20} class="flex-shrink-0" />
-          <p>
-            <span class="font-bold">Business Hours:</span>
-            Monday - Friday, 9:00 AM - 5:00 PM EST
-          </p>
-        </div>
-
-        <ul class="flex flex-wrap gap-2">
+        <ul class='flex flex-wrap gap-2'>
           <li>
-            <Link href="/" isButton isExternal hideIcon animateOnHover animationType="boop">
-              <Icon aria-hidden="true" name="lucide:facebook" size={32} />
-              <span class="sr-only">Go to our Facebook page, opens in a new tab</span>
+            <Link
+              href='/'
+              isButton
+              isExternal
+              hideIcon
+              animateOnHover
+              animationType='boop'
+            >
+              <Icon
+                aria-hidden='true'
+                name='lucide:facebook'
+                size={32}
+              />
+              <span class='sr-only'>Ir a nuestra página de Facebook, se abre en una nueva pestaña</span>
             </Link>
           </li>
           <li>
-            <Link href="/" isButton isExternal hideIcon animateOnHover animationType="boop">
-              <Icon aria-hidden="true" name="lucide:twitter" size={32} />
-              <span class="sr-only">Go to our Twitter page, opens in a new tab</span>
+            <Link
+              href='/'
+              isButton
+              isExternal
+              hideIcon
+              animateOnHover
+              animationType='boop'
+            >
+              <Icon
+                aria-hidden='true'
+                name='lucide:twitter'
+                size={32}
+              />
+              <span class='sr-only'>Ir a nuestra página de Twitter, se abre en una nueva pestaña</span>
             </Link>
           </li>
           <li>
-            <Link href="/" isButton isExternal hideIcon animateOnHover animationType="boop">
-              <Icon aria-hidden="true" name="lucide:linkedin" size={32} />
-              <span class="sr-only">Go to our LinkedIn page, opens in a new tab</span>
+            <Link
+              href='/'
+              isButton
+              isExternal
+              hideIcon
+              animateOnHover
+              animationType='boop'
+            >
+              <Icon
+                aria-hidden='true'
+                name='lucide:linkedin'
+                size={32}
+              />
+              <span class='sr-only'>Ir a nuestra página de LinkedIn, se abre en una nueva pestaña</span>
             </Link>
           </li>
         </ul>
