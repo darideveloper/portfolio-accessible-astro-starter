@@ -5,17 +5,40 @@ import { Heading, Link, Notification } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 ---
 
-<DefaultLayout title="Thank You">
-  <PageHeader title="Splendid!" subtitle="The form was successfully validated." bgType="gradient" />
-  <section class="container my-16">
-    <div class="space-content">
-      <Notification type="info">
-        <Icon aria-hidden="true" name="lucide:info" size={24} />
-        <p>This was a test of the form validation system, no email was sent 😉.</p>
+<DefaultLayout title='Gracias'>
+  <PageHeader
+    title='¡Perfecto!'
+    subtitle='El formulario fue validado exitosamente.'
+    bgType='gradient'
+  />
+  <section class='container my-16'>
+    <div class='space-content'>
+      <Notification type='info'>
+        <Icon
+          aria-hidden='true'
+          name='lucide:info'
+          size={24}
+        />
+        <p>¡Gracias por contactarme! Te responderé lo antes posible.</p>
       </Notification>
-      <Link href="/contact" isButton type="primary" animateOnHover animation="boop" pulse>
-        <Icon aria-hidden="true" name="lucide:mail" size={24} />
-        Send another message
+      <Link
+        href='/contact'
+        isButton
+        type='primary'
+        animateOnHover
+        animation='boop'
+        pulse
+      >
+        <Icon
+          aria-hidden='true'
+          name='lucide:mail'
+          size={24}
+        />
+        Enviar otro mensaje <Icon
+          aria-hidden='true'
+          name='lucide:arrow-right'
+          size={24}
+        />
       </Link>
     </div>
   </section>
