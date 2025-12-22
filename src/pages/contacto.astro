@@ -1,0 +1,254 @@
+---
+// Components
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import { Form, Input, Button, Textarea, Checkbox, Fieldset, Heading, Link, Radio } from 'accessible-astro-components'
+import { Icon } from 'astro-icon/components'
+
+// Data
+import { phone, phoneClean, email } from '../lib/constants/contacto'
+
+// Current host / url
+const currentHost = Astro.url.origin
+---
+
+<DefaultLayout title='Contact'>
+  <PageHeader
+    title='Hablemos de tu próximo gran paso'
+    subtitle='Cuéntame qué tienes en mente y yo te ayudaré a convertir esa idea en una <strong>solución digital fluida</strong>. No recibirás una respuesta automática genérica; recibirás una <strong>propuesta estratégica</strong> diseñada para que tu negocio <i>funcione como siempre imaginaste</i>.'
+    bgType='gradient'
+  />
+  <section class='my-16'>
+    <div class='container'>
+      <Heading level='h2'>Estás a un solo clic de simplificar tu tecnología</Heading>
+    </div>
+  </section>
+  <section class='container'>
+    <div class='grid grid-cols-1 gap-32 md:grid-cols-2'>
+      <div class='space-content'>
+        <Form
+          name='contact'
+          action='https://services.darideveloper.com/contacto-form/'
+          method='post'
+        >
+          <!-- Input field with custom validation message -->
+          <Input
+            name='firstname'
+            label='Nombre completo'
+            required
+            data-validation='Necesitamos tu nombre completo para dirigirnos a ti correctamente'
+            autocomplete='given-name'
+          />
+
+          <Input
+            name='email'
+            label='Email corporativo'
+            type='email'
+            required
+            autocomplete='email'
+          />
+
+          <!-- Custom validation with pattern -->
+          <Input
+            name='phone'
+            label='Teléfono de contacto'
+            type='tel'
+            required
+            data-validation-pattern='^[0-9]{10}$'
+          />
+
+          <Textarea
+            name='message'
+            label='Cuéntanos tu desafío'
+            required
+          />
+
+          <!-- Checkbox group with validation -->
+          <Fieldset
+            name='interests'
+            legend='¿Qué solución buscas?'
+            required
+            data-validation='Por favor selecciona al menos una opción'
+          >
+            <Checkbox
+              name='web-development'
+              value='web'
+              label='Desarrollo Web a medida'
+            />
+            <Checkbox
+              name='ecommerce'
+              value='ecommerce'
+              label='Tienda Online / E-commerce'
+            />
+            <Checkbox
+              name='dashboard'
+              value='dashboard'
+              label='Dashboard / Panel de Datos (Django)'
+            />
+            <Checkbox
+              name='seo'
+              value='seo'
+              label='Optimización SEO y Tráfico'
+            />
+            <Checkbox
+              name='automation'
+              value='automation'
+              label='Automatización de procesos'
+            />
+          </Fieldset>
+
+          <!-- Radio group (shared names) -->
+          <Fieldset
+            name='project-stage'
+            legend='¿En qué fase se encuentra tu negocio?'
+            required
+          >
+            <Radio
+              name='project-stage'
+              value='initial'
+              label='Tengo una idea inicial'
+            />
+            <Radio
+              name='project-stage'
+              value='in-progress'
+              label='Proyecto en marcha (necesito mejora)'
+            />
+            <Radio
+              name='project-stage'
+              value='established'
+              label='Empresa consolidada (necesito escalar)'
+            />
+          </Fieldset>
+
+          <Button
+            htmlType='submit'
+            type='primary'
+            >Solicitar propuesta gratuita</Button
+          >
+
+          <input
+            type='hidden'
+            name='api_key'
+            value='aHR9zwVL5r3a8Lo6qRy2v5A'
+          />
+          <input
+            type='hidden'
+            name='user'
+            value='daridev'
+          />
+          <input
+            type='hidden'
+            name='subject'
+            value='New contact email from website'
+          />
+          <input
+            type='hidden'
+            name='redirect'
+            value={`${currentHost}/thank-you`}
+          />
+        </Form>
+      </div>
+      <div class='space-content'>
+        <Heading level='h3'>Conectemos para escalar</Heading>
+        <p class='text-lg'>
+          No solo buscamos clientes, buscamos socios estratégicos que quieran transformar sus procesos. Si prefieres un
+          trato más directo o tienes una duda urgente, usa cualquiera de estos canales. En 3S, la comunicación es tan
+          fluida como nuestro código, por lo que <i>siempre encontrarás a un humano al otro lado</i> listo para ayudarte.
+        </p>
+
+        <div class='gap-2xs flex items-center'>
+          <Icon
+            aria-hidden='true'
+            name='lucide:phone'
+            size={20}
+            class='shrink-0'
+          />
+          <p>
+            <span class='font-bold'>Teléfono:</span>
+            <Link href={`tel:${phoneClean}`}>{phone}</Link>
+          </p>
+        </div>
+
+        <div class='gap-2xs flex items-center'>
+          <Icon
+            aria-hidden='true'
+            name='lucide:mail'
+            size={20}
+            class='shrink-0'
+          />
+          <p>
+            <span class='font-bold'>Correo electrónico:</span>
+            <Link href={`mailto:${email}`}>{email}</Link>
+          </p>
+        </div>
+
+        <div class='gap-2xs flex items-center'>
+          <Icon
+            aria-hidden='true'
+            name='lucide:clock'
+            size={20}
+            class='shrink-0'
+          />
+          <p>
+            <span class='font-bold'>Horarios de atención:</span>
+            Lunes - Domingo, 9:00 AM - 6:00 PM (GMT-6)
+          </p>
+        </div>
+
+        <ul class='flex flex-wrap gap-2'>
+          <li>
+            <Link
+              href='/'
+              isButton
+              isExternal
+              hideIcon
+              animateOnHover
+              animationType='boop'
+            >
+              <Icon
+                aria-hidden='true'
+                name='lucide:facebook'
+                size={32}
+              />
+              <span class='sr-only'>Ir a nuestra página de Facebook, se abre en una nueva pestaña</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/'
+              isButton
+              isExternal
+              hideIcon
+              animateOnHover
+              animationType='boop'
+            >
+              <Icon
+                aria-hidden='true'
+                name='lucide:twitter'
+                size={32}
+              />
+              <span class='sr-only'>Ir a nuestra página de Twitter, se abre en una nueva pestaña</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/'
+              isButton
+              isExternal
+              hideIcon
+              animateOnHover
+              animationType='boop'
+            >
+              <Icon
+                aria-hidden='true'
+                name='lucide:linkedin'
+                size={32}
+              />
+              <span class='sr-only'>Ir a nuestra página de LinkedIn, se abre en una nueva pestaña</span>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
