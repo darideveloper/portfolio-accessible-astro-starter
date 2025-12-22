@@ -45,33 +45,36 @@ interface Props {
 }
 
 const { page, uniqueTags } = Astro.props
-
-console.log(page.lastPage)
 ---
 
 <DefaultLayout
-  title="Portfolio"
-  description="A showcase of projects built with Astro Content Collections, demonstrating dynamic content management."
+  title='Soluciones reales para desafíos digitales'
+  description='En esta sección compartimos una selección de los proyectos donde hemos transformado ideas complejas en herramientas funcionales y escalables.'
 >
   <PageHeader
-    title="Portfolio"
-    subtitle='A showcase of projects built with Astro Content Collections, demonstrating dynamic content management and organization. Learn more about <a href="https://docs.astro.build/en/guides/content-collections/">Astro Content Collections</a> in the official documentation.'
-    bgType="bordered"
+    title='Soluciones reales para desafíos digitales'
+    subtitle='En esta sección compartimos una selección de los proyectos donde hemos transformado ideas complejas en <strong>herramientas funcionales y escalables</strong>. Desde plataformas a medida hasta estrategias SEO de alto impacto, cada trabajo es un reflejo de nuestro compromiso con el <strong>código limpio</strong> y los resultados que <i>realmente impulsan a nuestros clientes</i>.'
+    bgType='bordered'
   />
-  <section class="my-12">
-    <div class="container">
-      <Heading level="h2" size="h5" class="mb-2">Tags</Heading>
-      <div class="flex flex-wrap gap-4">
+  <section class='my-12'>
+    <div class='container'>
+      <Heading
+        level='h2'
+        size='h5'
+        class='mb-2'
+        >Etiquetas</Heading
+      >
+      <div class='flex flex-wrap gap-4'>
         {
           uniqueTags.map((tag: { label: string; slug: string }) => (
             <Link href={'/portfolio/tag/' + tag.slug}>{tag.label}</Link>
           ))
         }
       </div>
-      <p class="mt-8 text-sm">
-        <em>Project {page.start + 1} through {page.end + 1} of {page.total} total projects</em>
+      <p class='mt-8 text-sm'>
+        <em>Proyecto {page.start + 1} al {page.end + 1} de {page.total} proyectos en total</em>
       </p>
-      <ul class="mt-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <ul class='mt-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {
           page.data.map((project) => (
             <li>
@@ -79,11 +82,11 @@ console.log(page.lastPage)
                 imageComponent={project.featuredImage}
                 url={'/portfolio/' + project.id}
                 title={project.data.title}
-                headingLevel="h2"
-                footer={'Author: ' + project.data.author}
+                headingLevel='h2'
+                footer={'Autor: ' + project.data.author}
                 fullHeight={true}
               >
-                <span slot="meta">
+                <span slot='meta'>
                   {project.data.tags.map((tag) => (
                     <Badge>{tag}</Badge>
                   ))}
@@ -96,7 +99,7 @@ console.log(page.lastPage)
       </ul>
       {
         page && page.lastPage > 1 && (
-          <div class="mt-12 grid place-content-center">
+          <div class='mt-12 grid place-content-center'>
             <Pagination
               firstPage={page.url.prev ? '/portfolio' : null}
               previousPage={page.url.prev ? page.url.prev : null}
@@ -104,7 +107,7 @@ console.log(page.lastPage)
               lastPage={page.url.next ? `/portfolio/${page.lastPage}` : null}
               currentPage={`${page.currentPage}`}
               totalPages={`${page.lastPage}`}
-              ariaLabel="Portfolio pagination"
+              ariaLabel='Paginación del portfolio'
             />
           </div>
         )
