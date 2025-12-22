@@ -73,7 +73,17 @@
 
   input,
   textarea {
-    border: 1px solid gray;
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    border: 1px solid var(--border-color-subtle);
+
+    // Remove dashed outline on focus, use border color change instead
+    &:focus,
+    &:focus-visible {
+      outline: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      border-color: var(--brand-primary) !important;
+    }
   }
 
   button {
