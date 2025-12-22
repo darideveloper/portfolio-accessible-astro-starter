@@ -12,6 +12,7 @@ import { Icon } from 'astro-icon/components'
 
 // Data
 import { whatsappLink } from '../lib/constants/contact'
+import { serviceGroups } from '../lib/constants/services'
 
 // Animations identifiers
 const animationsClasses = {
@@ -103,67 +104,14 @@ const animationsClasses = {
         >Nuestros servicios</Heading
       >
       <div class='grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
-        <Feature
-          icon='lucide:layers'
-          title='Plataformas a medida'
-        >
-          Creamos software diseñado exclusivamente para tu empresa, resolviendo esos problemas específicos que las
-          herramientas genéricas no cubren.
-        </Feature>
-        <Feature
-          icon='lucide:layout-dashboard'
-          title='Paneles de control inteligentes'
-        >
-          Visualiza el estado de tu negocio en tiempo real con tableros sencillos que transforman datos en decisiones
-          claras.
-        </Feature>
-        <Feature
-          icon='lucide:shopping-cart'
-          title='Tiendas online profesionales'
-        >
-          Creamos tu canal de ventas en internet, diseñado para ser fácil de gestionar y, sobre todo, para vender más.
-        </Feature>
-        <Feature
-          icon='lucide:target'
-          title='Páginas de venta (Landings)'
-        >
-          Diseñamos webs directas y persuasivas, enfocadas en un solo objetivo: que tus clientes te contacten o compren
-          al instante.
-        </Feature>
-        <Feature
-          icon='lucide:grid'
-          title='Catálogos de productos'
-        >
-          Presenta tu oferta de forma elegante y organizada para que tus clientes encuentren lo que buscan sin
-          complicaciones.
-        </Feature>
-        <Feature
-          icon='lucide:search'
-          title='Visibilidad en buscadores'
-        >
-          No solo creamos tu web; hacemos que aparezca en los primeros resultados para que tus clientes ideales te
-          encuentren a ti.
-        </Feature>
-        <Feature
-          icon='lucide:shield-check'
-          title='Tranquilidad técnica'
-        >
-          Nos ocupamos de que tu web esté siempre activa, segura y rápida. Olvídate de los errores técnicos para
-          siempre.
-        </Feature>
-        <Feature
-          icon='lucide:zap'
-          title='Automatización de tareas'
-        >
-          Hacemos que la tecnología trabaje por ti. Ahorra horas de trabajo manual delegando procesos repetitivos al
-          software inteligente.
-        </Feature>
-        <Feature
-          icon='lucide:lightbulb'
-          title='Consultoría de mejora'
-        >
-          Analizamos lo que ya tienes para decirte cómo hacerlo más eficiente, moderno y ~~mucho más rentable~~.
-        </Feature>
+        {serviceGroups.homepage.map((service) => (
+          <Feature
+            icon={service.icon}
+            title={service.name}
+          >
+            {service.description}
+          </Feature>
+        ))}
       </div>
     </div>
   </section>

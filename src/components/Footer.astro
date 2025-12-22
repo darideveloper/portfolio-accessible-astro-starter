@@ -5,7 +5,7 @@ import Logo from './Logo.astro'
 import { Heading, Link } from 'accessible-astro-components'
 
 // Data
-import { phoneClean } from '../lib/constants/contact'
+import { serviceGroups, createServiceWhatsAppLink } from '../lib/constants/services'
 
 /**
  * Footer Component
@@ -13,13 +13,6 @@ import { phoneClean } from '../lib/constants/contact'
  * @description A component that displays the footer of the website
  */
 const currentYear = new Date().getFullYear()
-
-// Helper function to create WhatsApp links with context
-const createWhatsAppLink = (message: string) => {
-  const phone = phoneClean.replace('+52', '521')
-  const encodedMessage = encodeURIComponent(message)
-  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`
-}
 ---
 
 <footer>
@@ -38,48 +31,18 @@ const createWhatsAppLink = (message: string) => {
           >Servicios Principales</Heading
         >
         <ul class='flex flex-col gap-2'>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Desarrollo Web a medida')}
-              target='_blank'
-              >Desarrollo Web a medida</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre E-commerce y Tiendas')}
-              target='_blank'
-              >E-commerce y Tiendas</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Dashboards de Control')}
-              target='_blank'
-              >Dashboards de Control</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Apps Móviles')}
-              target='_blank'
-              >Apps Móviles</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Automatización de Procesos')}
-              target='_blank'
-              >Automatización de Procesos</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Consultoría Tecnológica')}
-              target='_blank'
-              >Consultoría Tecnológica</Link
-            >
-          </li>
+          {
+            serviceGroups.footerPrimary.map((service) => (
+              <li>
+                <Link
+                  href={createServiceWhatsAppLink(service)}
+                  target='_blank'
+                >
+                  {service.name}
+                </Link>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div class='flex flex-col gap-4 text-center md:text-left'>
@@ -89,41 +52,18 @@ const createWhatsAppLink = (message: string) => {
           >Estrategia y SEO</Heading
         >
         <ul class='flex flex-col gap-2'>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa solicitar una Auditoría SEO Gratuita')}
-              target='_blank'
-              >Auditoría SEO Gratuita</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Posicionamiento en Google')}
-              target='_blank'
-              >Posicionamiento en Google</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Optimización de Velocidad')}
-              target='_blank'
-              >Optimización de Velocidad</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Copywriting Persuasivo')}
-              target='_blank'
-              >Copywriting Persuasivo</Link
-            >
-          </li>
-          <li>
-            <Link
-              href={createWhatsAppLink('Hola, me interesa conocer más sobre Estrategia de Contenidos')}
-              target='_blank'
-              >Estrategia de Contenidos</Link
-            >
-          </li>
+          {
+            serviceGroups.footerSeo.map((service) => (
+              <li>
+                <Link
+                  href={createServiceWhatsAppLink(service)}
+                  target='_blank'
+                >
+                  {service.name}
+                </Link>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div class='flex flex-col gap-4 text-center md:text-left'>

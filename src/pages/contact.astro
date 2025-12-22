@@ -7,6 +7,7 @@ import { Icon } from 'astro-icon/components'
 
 // Data
 import { phone, phoneClean, email } from '../lib/constants/contact'
+import { serviceGroups } from '../lib/constants/services'
 
 // Current host / url
 const currentHost = Astro.url.origin
@@ -70,31 +71,13 @@ const currentHost = Astro.url.origin
             required
             data-validation='Por favor selecciona al menos una opción'
           >
-            <Checkbox
-              name='web-development'
-              value='web'
-              label='Desarrollo Web a medida'
-            />
-            <Checkbox
-              name='ecommerce'
-              value='ecommerce'
-              label='Tienda Online / E-commerce'
-            />
-            <Checkbox
-              name='dashboard'
-              value='dashboard'
-              label='Dashboard / Panel de Datos (Django)'
-            />
-            <Checkbox
-              name='seo'
-              value='seo'
-              label='Optimización SEO y Tráfico'
-            />
-            <Checkbox
-              name='automation'
-              value='automation'
-              label='Automatización de procesos'
-            />
+            {serviceGroups.contactForm.map((service) => (
+              <Checkbox
+                name={service.formName}
+                value={service.formValue}
+                label={service.shortName || service.name}
+              />
+            ))}
           </Fieldset>
 
           <!-- Radio group (shared names) -->
