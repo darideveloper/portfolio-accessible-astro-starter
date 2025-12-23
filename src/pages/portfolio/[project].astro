@@ -10,11 +10,9 @@ import { getProjectFeaturedImage } from '@/utils/getProjectImage'
 export async function getStaticPaths() {
   const projects = await getCollection('projects')
 
-  return projects.map((project, index) => {
-    // Use scalable utility function to get project image
-    // Automatically handles project-specific images or falls back to generic ones
-    // Checks frontmatter featuredImage first, then legacy map, then generic images
-    const featuredImage = getProjectFeaturedImage(project.id, project.data, index)
+  return projects.map((project) => {
+    // Use utility function to get project image from frontmatter
+    const featuredImage = getProjectFeaturedImage(project.id, project.data)
 
     const projectWithImage = {
       ...project,

@@ -1,12 +1,8 @@
 ---
-import { Card, Heading, Link } from 'accessible-astro-components'
+import { Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
-
-// Import images directly for optimization
-import projectImage1 from '@assets/images/projects/project-image-1.png'
-import projectImage2 from '@assets/images/projects/project-image-2.png'
-import projectImage3 from '@assets/images/projects/project-image-3.png'
+import { getProjectFeaturedImage } from '@/utils/getProjectImage'
 
 /**
  * FeaturedProjects Component
@@ -34,12 +30,11 @@ const { class: className, limit = 3, title = 'Proyectos destacados' } = Astro.pr
 
 // Get projects from content collection
 const projects = await getCollection('projects')
-const projectImages = [projectImage1, projectImage2, projectImage3]
 
 // Limit projects and add featured images
-const featuredProjects = projects.slice(0, limit).map((project, index) => ({
+const featuredProjects = projects.slice(0, limit).map((project) => ({
   ...project,
-  featuredImage: projectImages[index % projectImages.length],
+  featuredImage: getProjectFeaturedImage(project.id, project.data),
 }))
 ---
 
@@ -53,15 +48,37 @@ const featuredProjects = projects.slice(0, limit).map((project, index) => ({
     <div class='grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
       {
         featuredProjects.map((project) => (
-          <Card
-            imageComponent={project.featuredImage}
-            url={'/portfolio/' + project.id}
-            headingLevel='h2'
-            title={project.data.title}
-            footer={'Author: ' + project.data.author}
-          >
-            {project.data.description}
-          </Card>
+          <article class='flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900'>
+            <a
+              href={'/portfolio/' + project.id}
+              class='block'
+            >
+              <div class='relative h-48 w-full overflow-hidden'>
+                <img
+                  src={project.featuredImage}
+                  alt={project.data.title}
+                  class='h-full w-full object-cover'
+                  loading='lazy'
+                />
+              </div>
+            </a>
+            <div class='flex flex-1 flex-col p-6'>
+              <h2 class='mb-2 text-xl font-semibold'>
+                <a
+                  href={'/portfolio/' + project.id}
+                  class='hover:underline'
+                >
+                  {project.data.title}
+                </a>
+              </h2>
+              <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>
+                {project.data.description}
+              </p>
+              <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>
+                Author: {project.data.author}
+              </footer>
+            </div>
+          </article>
         ))
       }
     </div>
