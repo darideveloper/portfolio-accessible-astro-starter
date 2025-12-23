@@ -1,32 +1,34 @@
 /**
- * Get imported post image for optimization
+ * Get post image path from /public/posts/
  *
- * Returns imported image objects from src/assets/images/posts/
- * These are automatically optimized by Astro for better SEO and performance
+ * Returns string paths to images in the public folder
+ *
+ * @param index - Index of the image (0-5), defaults to 0
+ * @returns String path to the post image
  */
-import postImage1 from '@assets/images/posts/post-image-1.png'
-import postImage2 from '@assets/images/posts/post-image-2.png'
-import postImage3 from '@assets/images/posts/post-image-3.png'
-import postImage4 from '@assets/images/posts/post-image-4.png'
-import postImage5 from '@assets/images/posts/post-image-5.png'
-import postImage6 from '@assets/images/posts/post-image-6.png'
-
-const postImages = [postImage1, postImage2, postImage3, postImage4, postImage5, postImage6]
+const postImages = [
+  '/posts/post-image-1.png',
+  '/posts/post-image-2.png',
+  '/posts/post-image-3.png',
+  '/posts/post-image-4.png',
+  '/posts/post-image-5.png',
+  '/posts/post-image-6.png',
+]
 
 /**
- * Get a post image by index (0-5)
+ * Get a post image path by index (0-5)
  * @param index - Index of the image (0-5), defaults to 0
- * @returns Imported image object optimized by Astro
+ * @returns String path to the post image
  */
-export function getPostImage(index: number = 0) {
+export function getPostImage(index: number = 0): string {
   return postImages[index % postImages.length]
 }
 
 /**
- * Get all post images
- * @returns Array of all imported post images
+ * Get all post image paths
+ * @returns Array of all post image paths
  */
-export function getAllPostImages() {
+export function getAllPostImages(): string[] {
   return postImages
 }
 
