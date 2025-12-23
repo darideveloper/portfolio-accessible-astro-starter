@@ -92,7 +92,7 @@ const sanitizedSubtitle: string = subtitle
 ---
 
 <section class:list={[className, 'page-header']}>
-  <div class="container my-3">
+  <div class='container my-3'>
     {
       showBreadcrumbs &&
         (() => {
@@ -105,7 +105,10 @@ const sanitizedSubtitle: string = subtitle
 
           return (
             <Breadcrumbs>
-              <BreadcrumbsItem href="/" label="Home" />
+              <BreadcrumbsItem
+                href='/'
+                label='Home'
+              />
               {segments.map((segment, index) => {
                 if (joinLastBreadcrumb && index === segments.length - 1) {
                   return null
@@ -124,7 +127,13 @@ const sanitizedSubtitle: string = subtitle
                   return formatSegment(segment)
                 })()
 
-                return <BreadcrumbsItem href={isLast ? undefined : url} label={formattedName} currentPage={isLast} />
+                return (
+                  <BreadcrumbsItem
+                    href={isLast ? undefined : url}
+                    label={formattedName}
+                    currentPage={isLast}
+                  />
+                )
               })}
             </Breadcrumbs>
           )
@@ -132,26 +141,37 @@ const sanitizedSubtitle: string = subtitle
     }
   </div>
   <div class:list={['py-16', bgType && `bg-${bgType}`]}>
-    <div class="space-content container">
+    <div class='space-content container'>
       {
         featuredImage && (
-          <div class="featured-image-container mb-8">
+          <div class='featured-image-container mb-8'>
             <Image
               src={featuredImage}
-              alt=""
+              alt=''
               width={1200}
               height={250}
-              class="h-[250px] w-full rounded-lg object-cover"
+              class='h-[250px] w-full rounded-lg object-cover'
             />
           </div>
         )
       }
-      <Heading level="h1">{title}</Heading>
-      {sanitizedSubtitle && <p class="text-2xl" set:html={sanitizedSubtitle} />}
+      <Heading level='h1'>{title}</Heading>
+      {
+        sanitizedSubtitle && (
+          <p
+            class='text-2xl'
+            set:html={sanitizedSubtitle}
+          />
+        )
+      }
       {
         author && (
-          <div class="mt-6 flex items-center">
-            <Avatar title={author.name} image={author.image} subtitle={author.bio} />
+          <div class='mt-6 flex items-center'>
+            <Avatar
+              title={author.name}
+              img={author.image}
+              subtitle={author.bio}
+            />
           </div>
         )
       }
