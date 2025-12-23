@@ -5,23 +5,20 @@ import SocialShares from '@components/SocialShares.astro'
 import { Heading } from 'accessible-astro-components'
 import { getCollection, render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
+import { getProjectFeaturedImage } from '@/utils/getProjectImage'
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects')
 
-  const projectImages = [
-    { src: '/projects/project-image-1.png' },
-    { src: '/projects/project-image-2.png' },
-    { src: '/projects/project-image-3.png' },
-    { src: '/projects/project-image-4.png' },
-    { src: '/projects/project-image-5.png' },
-    { src: '/projects/project-image-6.png' },
-  ]
-
   return projects.map((project, index) => {
+    // Use scalable utility function to get project image
+    // Automatically handles project-specific images or falls back to generic ones
+    // Checks frontmatter featuredImage first, then legacy map, then generic images
+    const featuredImage = getProjectFeaturedImage(project.id, project.data, index)
+
     const projectWithImage = {
       ...project,
-      featuredImage: projectImages[index % projectImages.length].src,
+      featuredImage,
     }
 
     return {
@@ -40,34 +37,38 @@ const { Content } = await render(project)
 
 const author = {
   name: project.data.author,
-  image: '/projects/project-image-1.png',
-  bio: 'Project Creator',
+  image: '/logo-smooth-software-solutions-desarrollo-web-3s-small.webp',
+  bio: 'Empresa de desarrollo de software',
 }
 ---
 
-<DefaultLayout title={project.data.title} description={project.data.description} url={`/portfolio/${project.id}`}>
+<DefaultLayout
+  title={project.data.title}
+  description={project.data.description}
+  url={`/portfolio/${project.id}`}
+>
   <PageHeader
     title={project.data.title}
     subtitle={project.data.description}
     author={author}
-    bgType="bordered"
+    bgType='bordered'
     featuredImage={project.featuredImage}
   />
-  <section class="my-12">
-    <div class="narrow space-content container">
+  <section class='my-12'>
+    <div class='narrow space-content container'>
       <Content />
     </div>
   </section>
-  <section class="my-12">
-    <div class="narrow space-content container">
-      <Heading level="h2">Share this project</Heading>
+  <section class='my-12'>
+    <div class='narrow space-content container'>
+      <Heading level='h2'>Share this project</Heading>
       <p>Like this project? Share it with your network!</p>
       <SocialShares />
     </div>
   </section>
 </DefaultLayout>
 
-<style lang="scss" is:global>
+<style lang='scss' is:global>
   .narrow {
     margin-inline: auto;
     max-width: 65ch;

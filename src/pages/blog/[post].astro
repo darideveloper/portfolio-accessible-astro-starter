@@ -45,61 +45,65 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props
 const author = {
-  name: 'A11Y Person',
-  image: '/posts/post-image-1.png',
-  bio: 'Pasionate accessibility advocate',
+  name: 'Smooth Software Solutions (3S)',
+  image: '/logo-smooth-software-solutions-desarrollo-web-3s-small.webp',
+  bio: 'Empresa de desarrollo de software',
 }
 ---
 
-<DefaultLayout title={post.title} description={post.body} url={post.title}>
+<DefaultLayout
+  title={post.title}
+  description={post.body}
+  url={post.title}
+>
   <PageHeader
     title={post.title}
     subtitle={post.body}
     author={author}
-    bgType="bordered"
+    bgType='bordered'
     featuredImage={post.featuredImage}
   />
-  <section class="my-12">
-    <div class="narrow container">
-      <p class="text-2xl">{post.body}</p>
+  <section class='my-12'>
+    <div class='narrow container'>
+      <p class='text-2xl'>{post.body}</p>
     </div>
   </section>
-  <section class="my-12">
-    <div class="narrow space-content container">
-      <Heading level="h2">Demo content</Heading>
+  <section class='my-12'>
+    <div class='narrow space-content container'>
+      <Heading level='h2'>Demo content</Heading>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
       </p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div class='grid grid-cols-1 gap-4 md:grid-cols-2'>
         <Image
-          src="/posts/post-image-1.png"
-          alt=""
+          src='/posts/post-image-1.png'
+          alt=''
           width={1200}
           height={600}
-          class="h-[250px] w-full rounded-lg object-cover"
+          class='h-[250px] w-full rounded-lg object-cover'
         />
         <Image
-          src="/posts/post-image-2.png"
-          alt=""
+          src='/posts/post-image-2.png'
+          alt=''
           width={1200}
           height={600}
-          class="h-[250px] w-full rounded-lg object-cover"
+          class='h-[250px] w-full rounded-lg object-cover'
         />
         <Image
-          src="/posts/post-image-3.png"
-          alt=""
+          src='/posts/post-image-3.png'
+          alt=''
           width={1200}
           height={600}
-          class="h-[250px] w-full rounded-lg object-cover"
+          class='h-[250px] w-full rounded-lg object-cover'
         />
         <Image
-          src="/posts/post-image-4.png"
-          alt=""
+          src='/posts/post-image-4.png'
+          alt=''
           width={1200}
           height={600}
-          class="h-[250px] w-full rounded-lg object-cover"
+          class='h-[250px] w-full rounded-lg object-cover'
         />
       </div>
       <p>
@@ -108,28 +112,28 @@ const author = {
         ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
       </p>
-      <Heading level="h3">Demo content</Heading>
+      <Heading level='h3'>Demo content</Heading>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
       </p>
-      <ul class="list-inside list-disc">
+      <ul class='list-inside list-disc'>
         <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</li>
         <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</li>
         <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</li>
         <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</li>
         <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</li>
       </ul>
-      <Heading level="h3">Breakout Image</Heading>
+      <Heading level='h3'>Breakout Image</Heading>
       <p>
         This image breaks out of the narrow container on larger screens, creating a more immersive visual experience.
       </p>
-      <BreakoutImage src="/posts/post-image-2.png" />
+      <BreakoutImage src='/posts/post-image-2.png' />
       <p>
         Notice how the image above extends beyond the boundaries of the text content, creating visual interest and
         drawing attention to important visual elements.
       </p>
-      <Heading level="h3">Demo content</Heading>
+      <Heading level='h3'>Demo content</Heading>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
@@ -138,9 +142,9 @@ const author = {
       </p>
     </div>
   </section>
-  <section class="my-12">
-    <div class="narrow space-content container">
-      <Heading level="h2">Share this post</Heading>
+  <section class='my-12'>
+    <div class='narrow space-content container'>
+      <Heading level='h2'>Share this post</Heading>
       <p>Like this post? Share it with your friends!</p>
       <SocialShares />
     </div>
