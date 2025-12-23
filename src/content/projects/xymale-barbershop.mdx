@@ -6,6 +6,8 @@ tags: ['Web Development', 'Landing Page', 'Booking System']
 featuredImage: /projects/xymale-barbershop/01-xymale-barbershop-homepage-hero.webp
 ---
 
+import { Image } from 'astro:assets'
+
 ## Descripción del Proyecto
 
 **XYmale BARBERSHOP** es una _landing page_ diseñada para una barbería que busca **atraer clientes** destacando sus **servicios especializados** y facilitando la **reserva de citas** a través de una **página externa**. El sitio presenta una **imagen profesional y moderna**, enfocándose en la **calidad de sus cortes y tratamientos**, la **experiencia de su personal** y las **opiniones positivas de sus clientes**. Este proyecto demuestra nuestra capacidad para crear **páginas de destino efectivas** para negocios locales, con un enfoque en la **conversión** a través de la reserva de citas en una plataforma dedicada.
@@ -18,11 +20,16 @@ featuredImage: /projects/xymale-barbershop/01-xymale-barbershop-homepage-hero.we
 - **Book Now**: Llama a la acción para **reservar citas** a través de un **enlace a una página externa**.
 - **Información de contacto en el pie de página**: Incluye la **dirección**, el **número de teléfono**, el **correo electrónico** y el **horario de atención** de la barbería en Las Vegas, NV.
 
-import { Image } from 'astro:assets'
-
 ## Galería de Imágenes
 
 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <Image
+    src="/projects/xymale-barbershop/01-xymale-barbershop-homepage-hero.webp"
+    alt="Homepage hero de XYmale Barbershop con información de servicios"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
   <Image
     src="/projects/xymale-barbershop/02-xymale-barbershop-mens-haircut-gallery.webp"
     alt="Galería de imágenes de cortes de hombre"
@@ -32,21 +39,21 @@ import { Image } from 'astro:assets'
   />
   <Image
     src="/projects/xymale-barbershop/03-xymale-barbershop-expert-staff-las-vegas.webp"
-    alt="Haptic feedback device component of the smart home system"
+    alt="Personal experto de XYmale Barbershop en Las Vegas"
     width={1200}
     height={600}
     class="h-[250px] w-full rounded-lg object-cover"
   />
   <Image
     src="/projects/xymale-barbershop/04-xymale-barbershop-contact-and-testimonials.webp"
-    alt="User interacting with the smart home system via voice commands"
+    alt="Formulario de contacto y testimonios de clientes"
     width={1200}
     height={600}
     class="h-[250px] w-full rounded-lg object-cover"
   />
   <Image
     src="/projects/xymale-barbershop/05-xymale-barbershop-location-and-business-hours.webp"
-    alt="Dashboard showing analytics of voice command usage patterns"
+    alt="Ubicación y horarios de atención de la barbería"
     width={1200}
     height={600}
     class="h-[250px] w-full rounded-lg object-cover"
