@@ -12,7 +12,7 @@ import { Icon } from 'astro-icon/components'
 
 // Data
 import { whatsappLink } from '../lib/constants/contact'
-import { serviceGroups } from '../lib/constants/services'
+import { serviceGroups, createServiceWhatsAppLink } from '../lib/constants/services'
 
 // Animations identifiers
 const animationsClasses = {
@@ -107,8 +107,9 @@ const animationsClasses = {
         {
           serviceGroups.homepage.map((service) => (
             <Feature
-              icon={service.icon}
+              icon={service.icon || 'mdi:rocket'}
               title={service.name}
+              href={createServiceWhatsAppLink(service)}
             >
               {service.description}
             </Feature>

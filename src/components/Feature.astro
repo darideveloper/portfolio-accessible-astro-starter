@@ -1,5 +1,5 @@
 ---
-import { Heading } from 'accessible-astro-components'
+import { Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 
 /**
@@ -16,12 +16,20 @@ interface Props {
    * The title to display
    */
   title: string
+  /**
+   * The URL the feature card should link to
+   */
+  href: string
 }
 
-const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props
+const { icon = 'mdi:rocket', title = 'Title', href }: Props = Astro.props
 ---
 
-<div class='feature flex flex-col gap-4'>
+<Link
+  href={href}
+  target='_blank'
+  class='feature flex flex-col gap-4'
+>
   <Icon
     aria-hidden='true'
     name={icon}
@@ -31,13 +39,14 @@ const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props
       level='h3'
       size='h6'
       class='mb-2'
-      >{title}</Heading
     >
+      {title}
+    </Heading>
     <p>
       <slot>Característica destacada con funcionalidad personalizada adaptada a tus necesidades específicas.</slot>
     </p>
   </div>
-</div>
+</Link>
 
 <style lang='scss'>
   @use '../assets/scss/base/breakpoint' as *;
@@ -47,6 +56,8 @@ const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props
     cursor: pointer;
     padding: var(--space-l);
     inline-size: calc(100% - var(--space-l));
+    color: inherit;
+    text-decoration: none;
 
     > * {
       position: relative;
