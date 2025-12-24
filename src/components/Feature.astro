@@ -21,21 +21,30 @@ interface Props {
 const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props
 ---
 
-<div class="feature flex flex-col gap-4">
-  <Icon aria-hidden="true" name={icon} />
-  <div class="content">
-    <Heading level="h3" size="h6" class="mb-2">{title}</Heading>
+<div class='feature flex flex-col gap-4'>
+  <Icon
+    aria-hidden='true'
+    name={icon}
+  />
+  <div class='content'>
+    <Heading
+      level='h3'
+      size='h6'
+      class='mb-2'
+      >{title}</Heading
+    >
     <p>
       <slot>Característica destacada con funcionalidad personalizada adaptada a tus necesidades específicas.</slot>
     </p>
   </div>
 </div>
 
-<style lang="scss">
+<style lang='scss'>
   @use '../assets/scss/base/breakpoint' as *;
 
   .feature {
     position: relative;
+    cursor: pointer;
     padding: var(--space-l);
     inline-size: calc(100% - var(--space-l));
 
@@ -52,6 +61,20 @@ const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props
     &::after {
       position: absolute;
       content: '';
+    }
+
+    &::before,
+    .content,
+    [data-icon] {
+      transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    }
+
+    &:hover {
+      &::before,
+      .content,
+      [data-icon] {
+        translate: -10px -10px;
+      }
     }
 
     &::before {

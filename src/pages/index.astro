@@ -104,14 +104,16 @@ const animationsClasses = {
         >Nuestros servicios</Heading
       >
       <div class='grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
-        {serviceGroups.homepage.map((service) => (
-          <Feature
-            icon={service.icon}
-            title={service.name}
-          >
-            {service.description}
-          </Feature>
-        ))}
+        {
+          serviceGroups.homepage.map((service) => (
+            <Feature
+              icon={service.icon}
+              title={service.name}
+            >
+              {service.description}
+            </Feature>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -368,7 +370,7 @@ const animationsClasses = {
   const contentMediaClasses = [animationsClasses.contentMedia.image1, animationsClasses.contentMedia.image2]
   contentMediaClasses.forEach((className) => {
     gsap.to(`.${className} .img-wrapper`, {
-      scale: 1.3,
+      scale: 1.2,
       scrollTrigger: {
         trigger: `.${className} .img-wrapper`,
         start: 'top center',
