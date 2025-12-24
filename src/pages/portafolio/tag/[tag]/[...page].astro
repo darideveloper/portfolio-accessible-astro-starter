@@ -128,17 +128,13 @@ const { page, currentTag, uniqueTags } = Astro.props
                   <div class='mb-2 flex flex-wrap gap-2'>
                     {project.data.tags.map((tag) => {
                       const isCurrentTag = tag === currentTag.label
-                      return isCurrentTag ? (
-                        <Badge class='bg-blue-600 text-white'>{tag}</Badge>
-                      ) : (
-                        <Badge>{tag}</Badge>
-                      )
+                      return isCurrentTag ? <Badge class='bg-blue-600 text-white'>{tag}</Badge> : <Badge>{tag}</Badge>
                     })}
                   </div>
                   <h2 class='mb-2 text-xl font-semibold'>
                     <a
                       href={'/portafolio/' + project.id}
-                      class='transition-colors duration-200 hover:text-brand-primary hover:underline'
+                      class='hover:text-brand-primary transition-colors duration-200 hover:underline'
                     >
                       {project.data.title}
                     </a>

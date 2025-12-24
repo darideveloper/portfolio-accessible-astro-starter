@@ -54,19 +54,21 @@ const { page } = Astro.props as Props
 ---
 
 <DefaultLayout
-  title="Blog"
-  description="An example of a blog with dynamic content fetched from JSONPlaceholder using the title, body and userId."
+  title='Blog - Insights, estrategia y el futuro del software'
+  description='Bienvenidos a nuestro espacio de divulgación técnica y estratégica. Aquí compartimos nuestra visión sobre cómo la Inteligencia Artificial, el desarrollo a medida y el SEO pueden transformar empresas reales.'
 >
   <PageHeader
-    title="Blog"
-    subtitle='An example of a blog with dynamic content fetched from <a href="https://jsonplaceholder.typicode.com/posts">JSONPlaceholder</a> using the title, body and userId. The Accessible Astro Card Component is used here to display al the posts.'
-    bgType="bordered"
+    title='Insights, estrategia y el futuro del software'
+    subtitle='Bienvenidos a nuestro espacio de divulgación técnica y estratégica. Aquí compartimos nuestra visión sobre cómo la Inteligencia Artificial, el desarrollo a medida y el SEO pueden transformar empresas reales. No escribimos solo para otros desarrolladores; escribimos para <i>dueños de negocios que buscan soluciones claras</i> y resultados medibles en un entorno digital que nunca se detiene.'
+    bgType='bordered'
   />
 
-  <section class="my-12">
-    <div class="container">
-      <p class="text-sm"><em>Post {page.start + 1} through {page.end + 1} of {page.total} total posts</em></p>
-      <ul class="my-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <section class='my-12'>
+    <div class='container'>
+      <p class='text-sm'>
+        <em>Publicación {page.start + 1} a {page.end + 1} de {page.total} publicaciones en total</em>
+      </p>
+      <ul class='my-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {
           page.data.map((post) => (
             <li>
@@ -88,14 +90,14 @@ const { page } = Astro.props as Props
                   <h2 class='mb-2 text-xl font-semibold'>
                     <a
                       href={'/blog/' + post.shortUrl}
-                      class='transition-colors duration-200 hover:text-brand-primary hover:underline'
+                      class='hover:text-brand-primary transition-colors duration-200 hover:underline'
                     >
                       {post.title}
                     </a>
                   </h2>
                   <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>{post.body}</p>
                   <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>
-                    User ID: {post.userId}
+                    ID de usuario: {post.userId}
                   </footer>
                 </div>
               </article>
@@ -105,7 +107,7 @@ const { page } = Astro.props as Props
       </ul>
       {
         page && page.lastPage > 1 && (
-          <div class="mt-12 grid place-content-center">
+          <div class='mt-12 grid place-content-center'>
             <Pagination
               firstPage={page.url.prev ? '/blog' : null}
               previousPage={page.url.prev ? page.url.prev : null}
@@ -113,7 +115,7 @@ const { page } = Astro.props as Props
               lastPage={page.url.next ? `/blog/${page.lastPage}` : null}
               currentPage={`${page.currentPage}`}
               totalPages={`${page.lastPage}`}
-              ariaLabel="Blog pagination"
+              ariaLabel='Paginación del blog'
             />
           </div>
         )
