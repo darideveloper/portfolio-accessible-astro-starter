@@ -50,7 +50,7 @@ const featuredProjects = projects.slice(0, limit).map((project) => ({
         featuredProjects.map((project) => (
           <article class='group flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900'>
             <a
-              href={'/portfolio/' + project.id}
+              href={'/portafolio/' + project.id}
               class='block'
             >
               <div class='relative h-48 w-full overflow-hidden'>
@@ -65,15 +65,13 @@ const featuredProjects = projects.slice(0, limit).map((project) => ({
             <div class='flex flex-1 flex-col p-6'>
               <h2 class='mb-2 text-xl font-semibold'>
                 <a
-                  href={'/portfolio/' + project.id}
-                  class='transition-colors duration-200 hover:text-brand-primary hover:underline'
+                  href={'/portafolio/' + project.id}
+                  class='hover:text-brand-primary transition-colors duration-200 hover:underline'
                 >
                   {project.data.title}
                 </a>
               </h2>
-              <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>
-                {project.data.description}
-              </p>
+              <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>{project.data.description}</p>
               <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>
                 Author: {project.data.author}
               </footer>
@@ -84,7 +82,7 @@ const featuredProjects = projects.slice(0, limit).map((project) => ({
     </div>
     <div class='mt-12'>
       <Link
-        href='/portfolio/'
+        href='/portafolio/'
         isButton
         animateOnHover
         animationType='nudge'

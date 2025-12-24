@@ -4,7 +4,7 @@ import PageHeader from '@components/PageHeader.astro'
 import { Heading, Notification } from 'accessible-astro-components'
 import { getCollection } from 'astro:content'
 
-// Get all portfolio projects
+// Get all portafolio projects
 const projects = await getCollection('projects')
 
 // Define static pages with their descriptions
@@ -16,8 +16,8 @@ const staticPages = [
       'Bienvenido a nuestro sitio web accesible con desarrollo web moderno y principios de diseño inclusivo.',
   },
   {
-    title: 'Portfolio',
-    url: '/portfolio',
+    title: 'Portafolio',
+    url: '/portafolio',
     description: 'Una colección de proyectos que demuestran prácticas de diseño y desarrollo accesibles.',
   },
   {
@@ -97,12 +97,12 @@ const staticPages = [
         </div>
       </div>
 
-      <!-- Portfolio Projects Section -->
+      <!-- Portafolio Projects Section -->
       <div>
         <Heading
           level='h2'
           class='mb-6'
-          >Proyectos del portfolio</Heading
+          >Proyectos del portafolio</Heading
         >
         <p class='mb-6'>
           Explora nuestra colección de {projects.length} proyectos centrados en la accesibilidad que muestran prácticas de
@@ -117,7 +117,7 @@ const staticPages = [
                   size='h6'
                   class='mb-3'
                 >
-                  <a href={`/portfolio/${project.id}`}>{project.data.title}</a>
+                  <a href={`/portafolio/${project.id}`}>{project.data.title}</a>
                 </Heading>
                 <p class='mb-3'>{project.data.description}</p>
                 <div class='text-xs'>
@@ -127,7 +127,7 @@ const staticPages = [
                   <p>
                     URL:{' '}
                     <code class='rounded bg-neutral-100 px-1 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500'>
-                      /portfolio/{project.id}
+                      /portafolio/{project.id}
                     </code>
                   </p>
                 </div>

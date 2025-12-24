@@ -27,28 +27,50 @@ export const getStaticPaths = (async ({ paginate }) => {
     }
   })
 
-  return paginate(projectsWithImages, {
-    pageSize: 6,
-    props: { uniqueTags },
-  })
+  // Generate paginated pages for each tag
+  const allPaginatedPages = []
+
+  for (const tag of uniqueTags) {
+    const filteredProjects = projectsWithImages.filter((project) =>
+      project.data.tags.map((tag) => slugify(tag)).includes(tag.slug)
+    )
+
+    const paginatedPages = paginate(filteredProjects, {
+      pageSize: 6,
+      params: { tag: tag.slug },
+      props: {
+        currentTag: tag,
+        uniqueTags,
+      },
+    })
+
+    allPaginatedPages.push(...paginatedPages)
+  }
+
+  return allPaginatedPages
 }) satisfies GetStaticPaths
 
 interface Props {
   page: Page<CollectionEntry<'projects'> & { featuredImage: string }>
+  currentTag: { label: string; slug: string }
   uniqueTags: { label: string; slug: string }[]
 }
 
-const { page, uniqueTags } = Astro.props
+const { page, currentTag, uniqueTags } = Astro.props
 ---
 
 <DefaultLayout
-  title='Soluciones reales para desafíos digitales'
-  description='En esta sección compartimos una selección de los proyectos donde hemos transformado ideas complejas en herramientas funcionales y escalables.'
+  title={`Portafolio - ${currentTag.label}`}
+  description={`Projects filtered by ${currentTag.label} tag. Discover our work in ${currentTag.label} and related technologies.`}
 >
   <PageHeader
-    title='Soluciones reales para desafíos digitales'
-    subtitle='En esta sección compartimos una selección de los proyectos donde hemos transformado ideas complejas en <strong>herramientas funcionales y escalables</strong>. Desde plataformas a medida hasta estrategias SEO de alto impacto, cada trabajo es un reflejo de nuestro compromiso con el <strong>código limpio</strong> y los resultados que <i>realmente impulsan a nuestros clientes</i>.'
+    title={`Portafolio: ${currentTag.label}`}
+    subtitle={`Showing ${page.total} project${page.total !== 1 ? 's' : ''} tagged with "${currentTag.label}". <a href="/portafolio">View all projects</a> or filter by other tags below.`}
     bgType='bordered'
+    customBreadcrumbLabels={{
+      [currentTag.slug]: currentTag.label,
+    }}
+    joinLastBreadcrumb={true}
   />
   <section class='my-12'>
     <div class='container'>
@@ -56,17 +78,33 @@ const { page, uniqueTags } = Astro.props
         level='h2'
         size='h5'
         class='mb-2'
-        >Etiquetas</Heading
+        >Tags</Heading
       >
       <div class='flex flex-wrap gap-4'>
+        <Link href='/portafolio'>All projects</Link>
         {
-          uniqueTags.map((tag: { label: string; slug: string }) => (
-            <Link href={'/portfolio/tag/' + tag.slug}>{tag.label}</Link>
-          ))
+          uniqueTags.map((tag: { label: string; slug: string }) => {
+            const isCurrentTag = tag.slug === currentTag.slug
+            return isCurrentTag ? (
+              <Link
+                href={'/portafolio/tag/' + tag.slug}
+                disabled
+                class='disabled'
+              >
+                {tag.label}
+              </Link>
+            ) : (
+              <Link href={'/portafolio/tag/' + tag.slug}>{tag.label}</Link>
+            )
+          })
         }
       </div>
       <p class='mt-8 text-sm'>
-        <em>Proyecto {page.start + 1} al {page.end + 1} de {page.total} proyectos en total</em>
+        <em
+          >Project {page.start + 1} through {page.end + 1} of {page.total} total projects tagged with "{
+            currentTag.label
+          }"</em
+        >
       </p>
       <ul class='mt-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {
@@ -74,7 +112,7 @@ const { page, uniqueTags } = Astro.props
             <li>
               <article class='group flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900'>
                 <a
-                  href={'/portfolio/' + project.id}
+                  href={'/portafolio/' + project.id}
                   class='block'
                 >
                   <div class='relative h-48 w-full overflow-hidden'>
@@ -88,13 +126,18 @@ const { page, uniqueTags } = Astro.props
                 </a>
                 <div class='flex flex-1 flex-col p-6'>
                   <div class='mb-2 flex flex-wrap gap-2'>
-                    {project.data.tags.map((tag) => (
-                      <Badge>{tag}</Badge>
-                    ))}
+                    {project.data.tags.map((tag) => {
+                      const isCurrentTag = tag === currentTag.label
+                      return isCurrentTag ? (
+                        <Badge class='bg-blue-600 text-white'>{tag}</Badge>
+                      ) : (
+                        <Badge>{tag}</Badge>
+                      )
+                    })}
                   </div>
                   <h2 class='mb-2 text-xl font-semibold'>
                     <a
-                      href={'/portfolio/' + project.id}
+                      href={'/portafolio/' + project.id}
                       class='transition-colors duration-200 hover:text-brand-primary hover:underline'
                     >
                       {project.data.title}
@@ -102,7 +145,7 @@ const { page, uniqueTags } = Astro.props
                   </h2>
                   <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>{project.data.description}</p>
                   <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>
-                    Autor: {project.data.author}
+                    Author: {project.data.author}
                   </footer>
                 </div>
               </article>
@@ -110,17 +153,19 @@ const { page, uniqueTags } = Astro.props
           ))
         }
       </ul>
+
+      <!-- Pagination -->
       {
         page && page.lastPage > 1 && (
           <div class='mt-12 grid place-content-center'>
             <Pagination
-              firstPage={page.url.prev ? '/portfolio' : null}
+              firstPage={page.url.prev ? `/portafolio/tag/${currentTag.slug}` : null}
               previousPage={page.url.prev ? page.url.prev : null}
               nextPage={page.url.next ? page.url.next : null}
-              lastPage={page.url.next ? `/portfolio/${page.lastPage}` : null}
+              lastPage={page.url.next ? `/portafolio/tag/${currentTag.slug}/${page.lastPage}` : null}
               currentPage={`${page.currentPage}`}
               totalPages={`${page.lastPage}`}
-              ariaLabel='Paginación del portfolio'
+              ariaLabel={`${currentTag.label} portafolio pagination`}
             />
           </div>
         )
