@@ -45,7 +45,7 @@ import { whatsappLink } from '../lib/constants/contact'
         </h1>
         <div class='flex flex-col items-center gap-3 min-[500px]:flex-row md:items-start'>
           <Link
-            href={whatsappLink}
+            href='/contacto'
             isButton
             type='primary'
             animateOnHover6566
@@ -53,13 +53,14 @@ import { whatsappLink } from '../lib/constants/contact'
           >
             <Icon
               aria-hidden='true'
-              name='lucide:phone'
+              name='lucide:headset'
               size='1.5rem'
             />
             Contáctanos
           </Link>
           <Link
-            href='/quote/'
+            href={whatsappLink}
+            target='_blank'
             isButton
             type='secondary'
             animateOnHover
@@ -67,10 +68,10 @@ import { whatsappLink } from '../lib/constants/contact'
           >
             <Icon
               aria-hidden='true'
-              name='lucide:dollar-sign'
+              name='lucide:calculator'
               size='1.5rem'
             />
-            Cotiza tu proyecto
+            Solicita tu cotización
           </Link>
         </div>
       </div>
