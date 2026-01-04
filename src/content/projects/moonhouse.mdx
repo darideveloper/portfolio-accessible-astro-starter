@@ -1,0 +1,100 @@
+---
+title: 'Moonhouse'
+author: 'Smooth Software Solutions (3S)'
+description: 'Moonhouse is a custom-designed landing page created with Astro, intended to serve as the digital business card for a restaurant. The project is based on a design provided in Figma, with the primary objective of replicating it down to the last pixel.'
+tags: ['Web Development', 'Landing Page', 'Restaurant', 'Astro', 'Directus', 'React']
+featuredImage: /projects/moonhouse/02-moonhouse-hero-pagina-inicio-experiencia-gastronomica-3s.webp
+---
+
+import { Image } from 'astro:assets'
+
+## Descripción del Proyecto
+
+**Moonhouse** es una **landing page diseñada a medida** creada con **Astro**, pensada para servir como la **tarjeta de presentación digital** de un restaurante. El proyecto se basa en un diseño proporcionado en Figma, con el objetivo principal de replicarlo **pixel-perfect**. Como una *Single Page Application* (SPA), toda la información crucial —desde los platos y la galería hasta los detalles de contacto— está contenida en una sola página, optimizando la experiencia de usuario y la navegación. El sitio está diseñado para ser completamente dinámico, con un **backend personalizado en Directus** que permitirá al cliente actualizar fácilmente el contenido sin necesidad de editar el código.
+
+* **Fidelidad al diseño de Figma:** El proyecto se centra en la **réplica exacta del diseño** proporcionado por el cliente, asegurando que la estética y la experiencia de usuario sean idénticas a la visión original.
+* **Gestión de contenido dinámico:** El contenido del sitio, como los platos, la galería y la información de contacto, se gestionará a través de un **panel personalizado en Directus**. Esto da al cliente _control total_ sobre la información sin depender de un desarrollador para cada cambio.
+* **Renderizado del lado del servidor (SSR):** Las secciones clave de la página (galería, platos, información de contacto y horarios) se renderizan en el servidor, utilizando datos obtenidos de la **API de Directus**. Esto asegura que el contenido esté disponible de inmediato, mejorando el **rendimiento** y la **velocidad de carga**.
+* **SEO y metadatos completos:** Se implementará una estrategia robusta de metadatos, incluyendo **etiquetas meta HTML, Open Graph, JSON-LD y Twitter Cards**, para mejorar el posicionamiento en buscadores y la visibilidad al compartir en redes sociales.
+* **Multi-idioma:** El sitio contará con soporte para **inglés y español**, permitiendo al restaurante llegar a una audiencia más amplia.
+
+## Galería de Imágenes
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <Image
+    src="/projects/moonhouse/01-moonhouse-menu-pagina-inicio-restaurante-3s.webp"
+    alt="Moonhouse - Menú de la página de inicio del restaurante"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+  <Image
+    src="/projects/moonhouse/03-moonhouse-acceso-panel-administracion-crm-3s.webp"
+    alt="Moonhouse - Acceso al panel de administración CRM"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+  <Image
+    src="/projects/moonhouse/04-moonhouse-crm-gestion-productos-menu-digital-3s.webp"
+    alt="Moonhouse - Gestión de productos y menú digital en CRM"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+  <Image
+    src="/projects/moonhouse/05-moonhouse-sobre-nosotros-informacion-restaurante-3s.webp"
+    alt="Moonhouse - Información sobre nosotros del restaurante"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+  <Image
+    src="/projects/moonhouse/06-moonhouse-crm-actualizacion-tiempo-real-contenido-web-3s.webp"
+    alt="Moonhouse - Actualización en tiempo real del contenido web en CRM"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+  <Image
+    src="/projects/moonhouse/07-moonhouse-crm-gestion-galeria-imagenes-tiempo-real-3s.webp"
+    alt="Moonhouse - Gestión de galería de imágenes en tiempo real"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+  <Image
+    src="/projects/moonhouse/08-moonhouse-galeria-imagenes-landing-page-visual-3s.webp"
+    alt="Moonhouse - Galería de imágenes visual de la landing page"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+  <Image
+    src="/projects/moonhouse/09-moonhouse-footer-integracion-spotify-musica-ambiente-3s.webp"
+    alt="Moonhouse - Footer e integración de Spotify para música ambiente"
+    width={1200}
+    height={600}
+    class="h-[250px] w-full rounded-lg object-cover"
+  />
+</div>
+
+## Tecnologías Utilizadas
+
+- **Astro:** El framework principal para el desarrollo de la landing page.
+- **React:** Utilizado junto con Astro para crear componentes interactivos.
+- **Tailwind CSS y Sass:** Para un estilizado modular y eficiente, asegurando un diseño moderno y responsive.
+- **Directus:** La plataforma de gestión de contenido headless que proporcionará la API para actualizar la información de la página.
+- **AOS (Animate On Scroll):** Para animaciones al hacer scroll, añadiendo un toque dinámico a la experiencia de usuario.
+- **Swiper:** Para crear la galería de imágenes y otras secciones de carrusel.
+
+## Retos y Aprendizajes
+
+- **Fidelidad al diseño:** El principal desafío es replicar el diseño de Figma con **precisión pixel-perfect**, lo que requiere una atención meticulosa a los espacios, tipografía y detalles de diseño.
+- **Integración del Backend:** Conectar Astro con la **API de Directus** para servir contenido dinámicamente, asegurando que los datos se rendericen correctamente y se actualicen en tiempo real.
+- **Optimización del rendimiento:** A pesar de ser una SPA, es crucial asegurar que la página cargue rápidamente, especialmente con el **contenido dinámico** que se obtendrá de la API.
+- **Estrategia de metadatos dinámicos:** Implementar la lógica para que los metadatos se generen automática y correctamente, basados en el contenido de la API, esencial para un **SEO** efectivo en un sitio de una sola página.
+
+## Resultados
+
+El proyecto **Moonhouse** es una **solución digital completa y profesional** que cumple con altos estándares de diseño y funcionalidad. El sitio web no solo será una réplica exacta del concepto de Figma, sino que también estará optimizado para el **rendimiento**, la **gestión de contenido** y la **visibilidad online**, permitiendo al restaurante presentarse de una manera **moderna y efectiva** en el mundo digital.
