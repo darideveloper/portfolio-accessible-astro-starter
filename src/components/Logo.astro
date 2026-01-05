@@ -1,6 +1,9 @@
 ---
 import { Link } from 'accessible-astro-components'
 
+import { Image } from 'astro:assets'
+import logoImage from '../assets/images/logo-smooth-software-solutions-desarrollo-web-3s.webp'
+
 /**
  * Logo Component
  *
@@ -21,11 +24,11 @@ const { loading = 'eager' }: Props = Astro.props
   href='/'
   class='mt-6 flex flex-col items-center gap-2'
 >
-  <img
-    src='/logo-smooth-software-solutions-desarrollo-web-3s.webp'
+  <Image
+    src={logoImage}
     alt='Accessible Astro Logo'
-    width='100'
-    height='71'
+    width={100}
+    height={71}
     loading={loading}
   />
   <span class='text-center text-xs font-bold'>Smooth Software<br />Solutions</span>

@@ -7,12 +7,23 @@ import Counter from '@components/Counter.astro'
 import ContentMedia from '@components/ContentMedia.astro'
 import FeaturedProjects from '@components/FeaturedProjects.astro'
 import FeaturedPosts from '@components/FeaturedPosts.astro'
-import { Accordion, AccordionItem, Avatar, AvatarGroup, Heading, Link } from 'accessible-astro-components'
+import Avatar from '@components/Avatar.astro'
+import { Accordion, AccordionItem, AvatarGroup, Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 
 // Data
 import { whatsappLink } from '../lib/constants/contact'
 import { serviceGroups, createServiceWhatsAppLink } from '../lib/constants/services'
+
+// Assets
+import dashboardImage from '../assets/images/desarrollo-dashboards-ecommerce-medida-smooth-software.svg'
+import automatizacionImage from '../assets/images/automatizacion-procesos-ia-apps-estrategia.svg'
+import dariImg from '../assets/images/team/dari-developer-full-stack-team-leader-3s.webp'
+import nielsImg from '../assets/images/team/niels-bored-data-scientist-ingeniero-ia-3s.webp'
+import sagImg from '../assets/images/team/sag-dev-desarrollador-frontend-smooth-software.webp'
+import silviaImg from '../assets/images/team/silvia-eera-desarrolladora-full-stack-3s.webp'
+import reneImg from '../assets/images/team/rene-ojeda-experto-seo-copywriter-3s.webp'
+import victorImg from '../assets/images/team/victor-ojeda-especialista-seo-ads-3s.webp'
 
 // Animations identifiers
 const animationsClasses = {
@@ -73,7 +84,7 @@ const animationsClasses = {
 
   <!-- banners -->
   <ContentMedia
-    imgSrc='/desarrollo-dashboards-ecommerce-medida-smooth-software.svg'
+    imgSrc={dashboardImage}
     class={animationsClasses.contentMedia.image1}
   >
     <Heading level='h2'>Software que fluye con el ritmo de tu negocio</Heading>
@@ -84,7 +95,7 @@ const animationsClasses = {
     </p>
   </ContentMedia>
   <ContentMedia
-    imgSrc='/automatizacion-procesos-ia-apps-estrategia.svg'
+    imgSrc={automatizacionImage}
     reverseImg={true}
     class={animationsClasses.contentMedia.image2}
   >
@@ -147,37 +158,37 @@ const animationsClasses = {
           initials='DD'
           title='Dari Developer'
           subtitle='Estratega Tecnológico & Lead Developer'
-          img='/team/dari-developer-full-stack-team-leader-3s.webp'
+          img={dariImg}
         />
         <Avatar
           initials='NB'
           title='Niels Bored'
           subtitle='Arquitecto de IA & Ciencia de Datos'
-          img='/team/niels-bored-data-scientist-ingeniero-ia-3s.webp'
+          img={nielsImg}
         />
         <Avatar
           initials='SG'
           title='Sag Dev'
           subtitle='Especialista en Interfaces & Frontend'
-          img='/team/sag-dev-desarrollador-frontend-smooth-software.webp'
+          img={sagImg}
         />
         <Avatar
           initials='SI'
           title='Silvia Eera'
           subtitle='Desarrolladora Full Stack & Soluciones Web'
-          img='/team/silvia-eera-desarrolladora-full-stack-3s.webp'
+          img={silviaImg}
         />
         <Avatar
           initials='RO'
           title='René Ojeda'
           subtitle='Estratega SEO & Copywriting Creativo'
-          img='/team/rene-ojeda-experto-seo-copywriter-3s.webp'
+          img={reneImg}
         />
         <Avatar
           initials='VO'
           title='Victor Ojeda'
           subtitle='Consultor SEO & Especialista en Ads'
-          img='/team/victor-ojeda-especialista-seo-ads-3s.webp'
+          img={victorImg}
         />
       </AvatarGroup>
     </div>
@@ -319,66 +330,5 @@ const animationsClasses = {
 
 <!-- Page animations -->
 <script>
-  import { gsap } from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-  gsap.registerPlugin(ScrollTrigger)
-
-  const animationsClasses = (window as any).animationsClasses
-
-  // ---- Hero ----
-
-  // Zoom image when scroll down
-  gsap.to(`.${animationsClasses.hero.image}`, {
-    scale: 1.3,
-    scrollTrigger: {
-      trigger: `.${animationsClasses.hero.image}`,
-      start: 'top 20%',
-      end: 'bottom top',
-      scrub: 2,
-      markers: import.meta.env.MODE === 'development',
-    },
-  })
-
-  // Reveal text "smooth" and "software" when scroll down
-  gsap.to(`.${animationsClasses.hero.smooth}`, {
-    opacity: 0,
-    ease: 'power2.inOut',
-    scrollTrigger: {
-      trigger: `.${animationsClasses.hero.smooth}`,
-      start: 'top 20%',
-      end: 'bottom bottom',
-      scrub: true,
-      markers: import.meta.env.MODE === 'development',
-    },
-  })
-
-  gsap.to(`.${animationsClasses.hero.software}`, {
-    opacity: 1,
-    ease: 'power2.inOut',
-    scrollTrigger: {
-      trigger: `.${animationsClasses.hero.software}`,
-      start: 'top 20%',
-      end: 'bottom bottom',
-      scrub: true,
-      markers: import.meta.env.MODE === 'development',
-    },
-  })
-
-  // ---- Content Media ----
-
-  // Zoom image when scroll down
-  const contentMediaClasses = [animationsClasses.contentMedia.image1, animationsClasses.contentMedia.image2]
-  contentMediaClasses.forEach((className) => {
-    gsap.to(`.${className} .img-wrapper`, {
-      scale: 1.2,
-      scrollTrigger: {
-        trigger: `.${className} .img-wrapper`,
-        start: 'top center',
-        end: 'bottom center',
-        scrub: 2,
-        markers: import.meta.env.MODE === 'development',
-      },
-    })
-  })
+  import '../scripts/landing-animations.js'
 </script>

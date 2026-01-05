@@ -1,5 +1,5 @@
 ---
-import { Media } from 'accessible-astro-components'
+import { Image } from 'astro:assets'
 
 /**
  * ContentMedia Component
@@ -8,9 +8,9 @@ import { Media } from 'accessible-astro-components'
  */
 interface Props {
   /**
-   * The source URL for the image
+   * The source image (imported asset)
    */
-  imgSrc: string
+  imgSrc: ImageMetadata
   /**
    * Whether to display the image on the right side instead of the left
    * @default false
@@ -27,9 +27,10 @@ const { imgSrc, reverseImg = false, class: className }: Props = Astro.props
     <div class='grid grid-cols-1 gap-24 md:grid-cols-2'>
       {
         !reverseImg ? (
-          <Media
-            class='img-wrapper rounded-lg transition-all'
+          <Image
+            class='img-wrapper h-auto w-full rounded-lg transition-all'
             src={imgSrc}
+            alt=''
           />
         ) : (
           ''
@@ -40,9 +41,10 @@ const { imgSrc, reverseImg = false, class: className }: Props = Astro.props
       </div>
       {
         reverseImg ? (
-          <Media
-            class='img-wrapper rounded-lg transition-all'
+          <Image
+            class='img-wrapper h-auto w-full rounded-lg transition-all'
             src={imgSrc}
+            alt=''
           />
         ) : (
           ''
