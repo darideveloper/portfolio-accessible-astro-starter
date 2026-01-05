@@ -1,7 +1,8 @@
-# Capability: Blog Content Styling
+# blog-styling Specification
 
-## MODIFIED Requirements
-
+## Purpose
+TBD - created by archiving change improve-blog-content-styling. Update Purpose after archive.
+## Requirements
 ### Requirement: Enhanced Typography Spacing
 The blog content MUST have adequate vertical spacing between textual elements to ensure readability.
 #### Scenario: Vertical spacing between text elements
@@ -40,3 +41,4 @@ Tabular data and lists MUST be styled to be accessible and easy to parse visuall
 - **GIVEN** a table
 - **WHEN** rendered
 - **THEN** it SHOULD have a distinct header row and alternating or bordered rows for readability.
+
