@@ -18,7 +18,6 @@ export interface Post {
 
 const API_BASE = import.meta.env.API_BASE || 'https://services.darideveloper.com'
 const API_TOKEN = import.meta.env.API_TOKEN || import.meta.env.PUBLIC_API_TOKEN
-console.log({ API_BASE, API_TOKEN })
 
 if (!API_TOKEN) {
     console.warn('API_TOKEN is not defined in environment variables')
@@ -44,12 +43,10 @@ export async function getPosts(lang: string = 'es'): Promise<Post[]> {
 
     try {
         const response = await fetch(`${API_BASE}/api/posts/?details=true`, requestOptions)
-        console.log(response)
         if (!response.ok) {
             throw new Error(`API error: ${response.status} ${response.statusText}`)
         }
         const result = await response.json()
-        console.log(result?.results)
         return result?.results as Post[]
     } catch (error) {
         console.error('Error fetching posts:', error)

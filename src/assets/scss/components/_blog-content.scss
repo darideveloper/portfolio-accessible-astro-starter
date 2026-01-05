@@ -1,0 +1,158 @@
+@use '../base/breakpoint' as *;
+
+.post-content {
+  // Typography & Spacing
+  p,
+  ul,
+  ol,
+  dl,
+  blockquote,
+  table,
+  pre {
+    margin-block: 1.5rem;
+  }
+
+  // Headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-block-start: 3rem;
+    margin-block-end: 1.25rem;
+    color: var(--foreground-color);
+    line-height: 1.2;
+    font-family: var(--font-heading);
+
+    &:first-child {
+      margin-block-start: 0;
+    }
+  }
+
+  h2 {
+    font-size: var(--font-size-4);
+  }
+  h3 {
+    font-size: var(--font-size-3);
+  }
+  h4 {
+    font-size: var(--font-size-2);
+  }
+  h5 {
+    font-size: var(--font-size-1);
+  }
+  h6 {
+    font-size: var(--font-size-0);
+  }
+
+  @include breakpoint(m) {
+    h2 {
+      font-size: var(--font-size-5);
+    }
+    h3 {
+      font-size: var(--font-size-4);
+    }
+  }
+
+  // Blockquotes
+  blockquote {
+    border-radius: 0 var(--radius-m) var(--radius-m) 0;
+    border-inline-start: 4px solid var(--link-color);
+    background-color: color-mix(in srgb, var(--link-color) 5%, transparent);
+    padding-inline: 1.5rem;
+    padding-block: 0.5rem;
+    font-style: italic;
+
+    p {
+      margin-block: 0;
+    }
+  }
+
+  // Lists
+  ul,
+  ol {
+    padding-inline-start: 1.5rem;
+
+    li {
+      margin-block: 0.75rem;
+
+      &::marker {
+        color: var(--link-color);
+      }
+    }
+  }
+
+  // Separators
+  hr {
+    margin-inline: auto;
+    margin-block: 4rem;
+    border: 0;
+    border-block-start: 1px solid var(--border-color-subtle);
+    width: 60%;
+  }
+
+  // Images
+  img {
+    display: block;
+    margin-block: 2.5rem;
+    box-shadow: var(--elevation-3);
+    border-radius: var(--radius-l);
+    width: 100%;
+    height: auto;
+  }
+
+  // Tables
+  table {
+    margin-block: 2rem;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.95rem;
+
+    th,
+    td {
+      border-block-end: 1px solid var(--border-color-subtle);
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--color-neutral-200);
+      color: var(--foreground-color);
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-block-end: none;
+    }
+
+    tr:nth-child(even) {
+      background-color: color-mix(in srgb, var(--color-neutral-200) 50%, transparent);
+    }
+  }
+
+  // Code Snippets
+  pre {
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-m);
+    background-color: var(--color-neutral-900);
+    padding: 1.25rem;
+    overflow-x: auto;
+    color: var(--color-neutral-100);
+    font-size: 0.9rem;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+      color: inherit;
+    }
+  }
+
+  code {
+    border-radius: var(--radius-xs);
+    background-color: var(--color-neutral-200);
+    padding: 0.2rem 0.4rem;
+    font-size: 0.85em;
+    font-family: var(--font-mono, monospace);
+  }
+}
