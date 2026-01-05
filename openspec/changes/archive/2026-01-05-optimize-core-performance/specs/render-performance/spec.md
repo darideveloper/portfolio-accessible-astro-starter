@@ -1,6 +1,6 @@
 # Render Performance Specification
 
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: Animation Performance
 **Requirement:** Animation initialization scripts (e.g., GSAP) MUST be optimized to avoid forced reflows (layout thrashing) during the critical rendering path.
