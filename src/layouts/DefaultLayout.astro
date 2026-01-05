@@ -9,9 +9,13 @@ import { ClientRouter } from 'astro:transitions'
 const {
   title = 'Smooth Software Solutions',
   description = 'Smooth Software Solutions is a software development company that specializes in building custom software solutions for businesses.',
-  url = Astro.site,
+  url,
   image = 'social-preview-image.png',
   author = 'DariDeveloper',
+  type = 'website',
+  publishDate,
+  keywords,
+  robots,
 } = Astro.props
 ---
 
@@ -43,6 +47,10 @@ const {
       url={url}
       image={image}
       author={author}
+      type={type}
+      publishDate={publishDate}
+      keywords={keywords}
+      robots={robots}
     />
 
     <!-- Enable Astro View Transitions for all browsers -->

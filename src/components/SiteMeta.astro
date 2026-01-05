@@ -14,9 +14,9 @@ interface Props {
    */
   description: string
   /**
-   * The URL of the page
+   * The URL of the page (optional, defaults to current URL)
    */
-  url: string
+  url?: string
   /**
    * The image path for social sharing
    */
@@ -25,17 +25,71 @@ interface Props {
    * The author of the page
    */
   author?: string
+  /**
+   * Type of page ('website' or 'article')
+   */
+  type?: 'website' | 'article'
+  /**
+   * Publication date for articles
+   */
+  publishDate?: string
+  /**
+   * Keywords for the page
+   */
+  keywords?: string
+  /**
+   * Robots meta tag content
+   */
+  robots?: string
 }
 
-const { title, description, url, image, author = 'DariDeveloper' } = Astro.props
+const {
+  title,
+  description,
+  url = Astro.url.href,
+  image,
+  author = 'DariDeveloper',
+  type = 'website',
+  publishDate,
+  keywords,
+  robots = 'index, follow',
+} = Astro.props
 
-let subtitle = 'Smooth Software Solutions (3S)'
+const subtitle = 'Smooth Software Solutions (3S)'
+const siteName = 'Smooth Software Solutions'
+const twitterHandle = '@DariDeveloper' // Default handle
+const fullTitle = `${title} - ${subtitle}`
+const imageUrl = `${Astro.site}${image}`
+
+// JSON-LD Logic
+const jsonLd =
+  type === 'article'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: title,
+        description: description,
+        image: imageUrl,
+        datePublished: publishDate,
+        author: {
+          '@type': 'Person',
+          name: author,
+        },
+      }
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: siteName,
+        url: Astro.site,
+        logo: `${Astro.site}logo.png`,
+        sameAs: ['https://twitter.com/darideveloper'],
+      }
 ---
 
 <!-- general meta -->
 <meta
   name='title'
-  content={`${title} - ${subtitle}`}
+  content={fullTitle}
 />
 <meta
   name='description'
@@ -45,11 +99,29 @@ let subtitle = 'Smooth Software Solutions (3S)'
   name='author'
   content={author}
 />
+{
+  keywords && (
+    <meta
+      name='keywords'
+      content={keywords}
+    />
+  )
+}
+<meta
+  name='robots'
+  content={robots}
+/>
+
+<!-- canonical url -->
+<link
+  rel='canonical'
+  href={url}
+/>
 
 <!-- open graph -->
 <meta
   property='og:title'
-  content={`${title} - ${subtitle}`}
+  content={fullTitle}
 />
 <meta
   property='og:description'
@@ -57,7 +129,7 @@ let subtitle = 'Smooth Software Solutions (3S)'
 />
 <meta
   property='og:type'
-  content='website'
+  content={type}
 />
 <meta
   property='og:url'
@@ -65,10 +137,44 @@ let subtitle = 'Smooth Software Solutions (3S)'
 />
 <meta
   property='og:image'
-  content={`${Astro.site}${image}`}
+  content={imageUrl}
+/>
+<meta
+  property='og:site_name'
+  content={siteName}
 />
 
 <!-- twitter card -->
+<meta
+  name='twitter:card'
+  content='summary_large_image'
+/>
+<meta
+  name='twitter:site'
+  content={twitterHandle}
+/>
+<meta
+  name='twitter:creator'
+  content={twitterHandle}
+/>
+<meta
+  name='twitter:title'
+  content={fullTitle}
+/>
+<meta
+  name='twitter:description'
+  content={description}
+/>
+<meta
+  name='twitter:image'
+  content={imageUrl}
+/>
+
+<!-- json-ld -->
+<script
+  type='application/ld+json'
+  set:html={JSON.stringify(jsonLd)}
+/>
 
 <!-- page title -->
-<title>{title} - {subtitle}</title>
+<title>{fullTitle}</title>
