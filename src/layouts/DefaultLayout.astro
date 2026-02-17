@@ -5,22 +5,26 @@ import SiteMeta from '@components/SiteMeta.astro'
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
 import { ClientRouter } from 'astro:transitions'
+import { SITE } from '../lib/constants/site'
 
 const {
-  title = 'Smooth Software Solutions',
-  description = 'Smooth Software Solutions is a software development company that specializes in building custom software solutions for businesses.',
+  title = SITE.name,
+  description = SITE.description,
   url,
   image = 'social-preview-image.png',
-  author = 'DariDeveloper',
+  author = SITE.author,
   type = 'website',
   publishDate,
   keywords,
   robots,
+  lang = SITE.defaultLanguage,
+  ogLocale,
+  breadcrumbs,
 } = Astro.props
 ---
 
 <html
-  lang='en'
+  lang={lang}
   dir='ltr'
 >
   <head>
@@ -43,7 +47,7 @@ const {
 
     <SiteMeta
       title={title}
-      description={description.substring(0, 100)}
+      description={description}
       url={url}
       image={image}
       author={author}
@@ -51,6 +55,9 @@ const {
       publishDate={publishDate}
       keywords={keywords}
       robots={robots}
+      lang={lang}
+      ogLocale={ogLocale}
+      breadcrumbs={breadcrumbs}
     />
 
     <!-- Enable Astro View Transitions for all browsers -->

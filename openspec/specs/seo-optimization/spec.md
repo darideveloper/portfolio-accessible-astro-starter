@@ -1,7 +1,8 @@
-# SEO and Metadata Optimization
+# seo-optimization Specification
 
-## ADDED Requirements
-
+## Purpose
+TBD - created by archiving change enhance-seo-metadata. Update Purpose after archive.
+## Requirements
 ### Requirement: Canonical URL
 - All pages MUST include a `<link rel="canonical" href="...">` tag.
 - The canonical URL MUST point to the current page's preferred URL (handling trailing slashes consistently).
@@ -31,8 +32,6 @@ Then the source MUST contain a JSON-LD script defining a `BlogPosting`.
 Given a user views the page source
 Then `twitter:card` meta tag MUST be present with value `summary_large_image`.
 
-## MODIFIED Requirements
-
 ### Requirement: Open Graph Tags
 - `og:type` MUST be dynamic: `website` for general pages, `article` for blog posts.
 - `og:image` MUST include the full absolute URL.
@@ -40,3 +39,4 @@ Then `twitter:card` meta tag MUST be present with value `summary_large_image`.
 #### Scenario: Dynamic OG Type
 Given a blog post page
 Then `og:type` MUST be `article`.
+

@@ -44,6 +44,11 @@ const author = {
   title={project.data.title}
   description={project.data.description}
   url={`/portafolio/${project.id}`}
+  breadcrumbs={[
+    { name: 'Home', item: Astro.site },
+    { name: 'Portafolio', item: `${Astro.site}portafolio` },
+    { name: project.data.title, item: Astro.url.href },
+  ]}
 >
   <PageHeader
     title={project.data.title}

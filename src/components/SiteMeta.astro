@@ -1,4 +1,6 @@
 ---
+import { SITE } from '../lib/constants/site'
+
 /**
  * SiteMeta Component
  *
@@ -41,6 +43,18 @@ interface Props {
    * Robots meta tag content
    */
   robots?: string
+  /**
+   * Language of the page (optional, defaults to English)
+   */
+  lang?: string
+  /**
+   * Open Graph locale
+   */
+  ogLocale?: string
+  /**
+   * Breadcrumbs for the page
+   */
+  breadcrumbs?: Array<{ name: string; item: string }>
 }
 
 const {
@@ -48,42 +62,61 @@ const {
   description,
   url = Astro.url.href,
   image,
-  author = 'DariDeveloper',
+  author = SITE.author,
   type = 'website',
   publishDate,
   keywords,
   robots = 'index, follow',
+  lang = SITE.defaultLanguage,
+  ogLocale = 'en_US',
+  breadcrumbs = [],
 } = Astro.props
 
-const subtitle = 'Smooth Software Solutions (3S)'
-const siteName = 'Smooth Software Solutions'
-const twitterHandle = '@DariDeveloper' // Default handle
-const fullTitle = `${title} - ${subtitle}`
+const fullTitle = `${title} - ${SITE.title}`
 const imageUrl = `${Astro.site}${image}`
 
 // JSON-LD Logic
-const jsonLd =
-  type === 'article'
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: title,
-        description: description,
-        image: imageUrl,
-        datePublished: publishDate,
-        author: {
-          '@type': 'Person',
-          name: author,
-        },
-      }
-    : {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: siteName,
-        url: Astro.site,
-        logo: `${Astro.site}logo.png`,
-        sameAs: ['https://twitter.com/darideveloper'],
-      }
+const schemas = []
+
+// Organization Schema
+schemas.push({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/logo.png`,
+  sameAs: ['https://twitter.com/darideveloper'],
+})
+
+// Breadcrumb Schema
+if (breadcrumbs.length > 0) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.item,
+    })),
+  })
+}
+
+// Article Schema
+if (type === 'article') {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: description,
+    image: imageUrl,
+    datePublished: publishDate,
+    author: {
+      '@type': 'Person',
+      name: author,
+    },
+  })
+}
 ---
 
 <!-- general meta -->
@@ -118,6 +151,18 @@ const jsonLd =
   href={url}
 />
 
+<!-- hreflang -->
+<link
+  rel='alternate'
+  href={url}
+  hreflang='x-default'
+/>
+<link
+  rel='alternate'
+  href={url}
+  hreflang={lang}
+/>
+
 <!-- open graph -->
 <meta
   property='og:title'
@@ -141,7 +186,11 @@ const jsonLd =
 />
 <meta
   property='og:site_name'
-  content={siteName}
+  content={SITE.name}
+/>
+<meta
+  property='og:locale'
+  content={ogLocale}
 />
 
 <!-- twitter card -->
@@ -151,11 +200,11 @@ const jsonLd =
 />
 <meta
   name='twitter:site'
-  content={twitterHandle}
+  content={SITE.twitter}
 />
 <meta
   name='twitter:creator'
-  content={twitterHandle}
+  content={SITE.twitter}
 />
 <meta
   name='twitter:title'
@@ -171,10 +220,14 @@ const jsonLd =
 />
 
 <!-- json-ld -->
-<script
-  type='application/ld+json'
-  set:html={JSON.stringify(jsonLd)}
-/>
+{
+  schemas.map((schema) => (
+    <script
+      type='application/ld+json'
+      set:html={JSON.stringify(schema)}
+    />
+  ))
+}
 
 <!-- page title -->
 <title>{fullTitle}</title>

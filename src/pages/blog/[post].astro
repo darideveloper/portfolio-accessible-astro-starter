@@ -30,6 +30,12 @@ const contentHtml = await markdownToHtml(post.content)
   title={post.title}
   description={post.description}
   url={post.slug}
+  type='article'
+  breadcrumbs={[
+    { name: 'Home', item: Astro.site },
+    { name: 'Blog', item: `${Astro.site}blog` },
+    { name: post.title, item: Astro.url.href },
+  ]}
 >
   <PageHeader
     title={post.title}

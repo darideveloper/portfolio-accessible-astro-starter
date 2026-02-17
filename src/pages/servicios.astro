@@ -3,7 +3,13 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 ---
 
-<DefaultLayout title='Nuestros Servicios'>
+<DefaultLayout
+  title='Nuestros Servicios'
+  breadcrumbs={[
+    { name: 'Home', item: Astro.site },
+    { name: 'Servicios', item: Astro.url.href },
+  ]}
+>
   <PageHeader
     title='Nuestros Servicios'
     subtitle='Explora nuestra gama completa de soluciones digitales. Selecciona los servicios que necesitas y obtén una cotización personalizada al instante.'
