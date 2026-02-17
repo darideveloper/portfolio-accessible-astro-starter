@@ -54,6 +54,7 @@ if (isLinked) {
   }
   viteConfig.optimizeDeps = {
     exclude: ['accessible-astro-components'],
+    include: ['gsap', 'gsap/ScrollTrigger'],
   }
 
   // Custom watcher for linked components - triggers reload on changes

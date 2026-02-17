@@ -11,6 +11,8 @@ function initAnimations() {
   const animationsClasses = window.animationsClasses
   if (!animationsClasses) return
 
+  console.log('Initializing animations with classes:', animationsClasses)
+
   ctx = gsap.context(() => {
     // ---- Hero ----
 
@@ -77,6 +79,8 @@ function initAnimations() {
         })
       })
     })
+    // Force ScrollTrigger to refresh its calculations
+    ScrollTrigger.refresh()
   })
 }
 

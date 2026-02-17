@@ -28,7 +28,7 @@ const { imgSrc, reverseImg = false, class: className }: Props = Astro.props
       {
         !reverseImg ? (
           <Image
-            class='img-wrapper h-auto w-full rounded-lg transition-all'
+            class='img-wrapper h-auto w-full rounded-lg'
             src={imgSrc}
             alt=''
           />
@@ -42,7 +42,7 @@ const { imgSrc, reverseImg = false, class: className }: Props = Astro.props
       {
         reverseImg ? (
           <Image
-            class='img-wrapper h-auto w-full rounded-lg transition-all'
+            class='img-wrapper h-auto w-full rounded-lg'
             src={imgSrc}
             alt=''
           />
