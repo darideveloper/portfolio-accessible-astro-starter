@@ -5,29 +5,18 @@ import SocialShares from '@components/SocialShares.astro'
 import { Heading } from 'accessible-astro-components'
 import { getCollection, render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { getProjectFeaturedImage } from '@/utils/getProjectImage'
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects')
 
-  return projects.map((project) => {
-    // Use utility function to get project image from frontmatter
-    const featuredImage = getProjectFeaturedImage(project.id, project.data)
-
-    const projectWithImage = {
-      ...project,
-      featuredImage,
-    }
-
-    return {
-      params: { project: project.id },
-      props: { project: projectWithImage },
-    }
-  })
+  return projects.map((project) => ({
+    params: { project: project.id },
+    props: { project },
+  }))
 }
 
 interface Props {
-  project: CollectionEntry<'projects'> & { featuredImage: string }
+  project: CollectionEntry<'projects'>
 }
 
 const { project } = Astro.props
@@ -55,7 +44,7 @@ const author = {
     subtitle={project.data.description}
     author={author}
     bgType='bordered'
-    featuredImage={project.featuredImage}
+    featuredImage={project.data.featuredImage}
   />
   <section class='my-12'>
     <div class='narrow space-content container'>

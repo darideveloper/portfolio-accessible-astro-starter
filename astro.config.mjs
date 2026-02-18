@@ -90,5 +90,8 @@ export default defineConfig({
   compressHTML: true,
   site: 'https://software3s.com',
   integrations: [compress(), icon(), mdx(), sitemap()],
+  image: {
+    domains: ['services.darideveloper.com'],
+  },
   vite: viteConfig,
 })

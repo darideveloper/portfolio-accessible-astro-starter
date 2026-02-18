@@ -2,7 +2,7 @@
 import { Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
-import { getProjectFeaturedImage } from '@/utils/getProjectImage'
+import { Image } from 'astro:assets'
 
 /**
  * FeaturedProjects Component
@@ -31,11 +31,8 @@ const { class: className, limit = 3, title = 'Proyectos destacados' } = Astro.pr
 // Get projects from content collection
 const projects = await getCollection('projects')
 
-// Limit projects and add featured images
-const featuredProjects = projects.slice(0, limit).map((project) => ({
-  ...project,
-  featuredImage: getProjectFeaturedImage(project.id, project.data),
-}))
+// Limit projects
+const featuredProjects = projects.slice(0, limit)
 ---
 
 <section class:list={[className, 'my-64']}>
@@ -54,9 +51,11 @@ const featuredProjects = projects.slice(0, limit).map((project) => ({
               class='block'
             >
               <div class='relative h-48 w-full overflow-hidden'>
-                <img
-                  src={project.featuredImage}
+                <Image
+                  src={project.data.featuredImage}
                   alt={project.data.title}
+                  width={800}
+                  height={450}
                   class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'
                   loading='lazy'
                 />

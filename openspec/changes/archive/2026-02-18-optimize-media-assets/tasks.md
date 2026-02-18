@@ -1,0 +1,12 @@
+- [x] Add `services.darideveloper.com` to `image.domains` in `astro.config.mjs`
+- [x] Update `src/components/PageHeader.astro` to accept `ImageMetadata` in `featuredImage` prop
+- [x] Migrate blog list (`src/pages/blog/[...page].astro`) from `<img>` to `<Image />`
+- [x] Create directory `src/assets/projects/`
+- [x] Move images from `public/projects/` to `src/assets/projects/`
+- [x] Update `src/content.config.ts` to use `image()` helper for the `projects` collection
+- [x] Update all `src/content/projects/*.mdx` files to use relative paths for `featuredImage`
+- [x] Remove `src/utils/getProjectImage.ts` and its usages (schema-based images are handled directly)
+- [x] Update `src/components/FeaturedProjects.astro` to use `<Image />`
+- [x] Update `src/pages/portafolio/[...page].astro` to use `<Image />`
+- [x] Update single project page `src/pages/portafolio/[project].astro` to pass the image object to `PageHeader`
+- [x] Verify build performance and optimized asset generation in `dist/`

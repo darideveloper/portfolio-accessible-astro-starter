@@ -1,6 +1,7 @@
 ---
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
+import { Image } from 'astro:assets'
 import { Pagination } from 'accessible-astro-components'
 import type { PaginateFunction, Page } from 'astro'
 
@@ -66,9 +67,11 @@ const { page } = Astro.props as Props
                   class='block'
                 >
                   <div class='relative h-48 w-full overflow-hidden'>
-                    <img
+                    <Image
                       src={post.featuredImage}
                       alt={post.title}
+                      width={800}
+                      height={450}
                       class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'
                       loading='lazy'
                     />
