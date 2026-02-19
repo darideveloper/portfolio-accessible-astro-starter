@@ -18,9 +18,17 @@ interface Props {
     software: string
     image: string
   }
+  /**
+   * The alt text for the image
+   */
+  imageAlt?: string
 }
 
-const { src = '/desarrollo-software-a-medida-smooth-software-solutions.svg', animationsClasses }: Props = Astro.props
+const {
+  src = '/desarrollo-software-a-medida-smooth-software-solutions.svg',
+  animationsClasses,
+  imageAlt = 'Hero Image',
+}: Props = Astro.props
 
 import { whatsappLink } from '../lib/constants/contact'
 ---
@@ -75,7 +83,8 @@ import { whatsappLink } from '../lib/constants/contact'
       <Image
         class={`hidden lg:block ${animationsClasses.image}`}
         src={src}
-        alt=''
+        alt={imageAlt}
+        title={imageAlt}
         decoding='async'
         width={800}
         height={600}

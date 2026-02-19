@@ -18,9 +18,11 @@ const { img, title, subtitle, initials } = Astro.props
     <Image
       src={img}
       alt={title}
+      title={title}
       class='h-full w-full object-cover'
       width={128}
       height={128}
+      loading='lazy'
     />
   </div>
   <div>

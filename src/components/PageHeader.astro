@@ -55,6 +55,10 @@ interface Props {
    * Whether to join the last breadcrumb
    */
   joinLastBreadcrumb?: boolean
+  /**
+   * The alt text for the featured image
+   */
+  imageAlt?: string
 }
 
 const {
@@ -67,6 +71,7 @@ const {
   author,
   customBreadcrumbLabels,
   joinLastBreadcrumb = false,
+  imageAlt,
 } = Astro.props
 
 // Helper function to format segment names
@@ -148,10 +153,12 @@ const sanitizedSubtitle: string = subtitle
           <div class='featured-image-container mb-8'>
             <Image
               src={featuredImage}
-              alt=''
+              alt={imageAlt || title}
+              title={imageAlt || title}
               width={1280}
               height={720}
               class='h-auto w-full rounded-lg object-cover'
+              loading='eager'
             />
           </div>
         )
