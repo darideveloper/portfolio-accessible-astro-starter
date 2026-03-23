@@ -70,6 +70,7 @@ const { page } = Astro.props as Props
                     <Image
                       src={post.featuredImage}
                       alt={post.title}
+                      title={post.title}
                       width={800}
                       height={450}
                       class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'

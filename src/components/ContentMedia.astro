@@ -23,7 +23,7 @@ interface Props {
   imageAlt?: string
 }
 
-const { imgSrc, reverseImg = false, class: className, imageAlt = '' }: Props = Astro.props
+const { imgSrc, reverseImg = false, class: className, imageAlt = 'Content Image' }: Props = Astro.props
 ---
 
 <section class={`my-64 ${className}`}>
@@ -34,8 +34,8 @@ const { imgSrc, reverseImg = false, class: className, imageAlt = '' }: Props = A
           <Image
             class='img-wrapper h-auto w-full rounded-lg'
             src={imgSrc}
-            alt={imageAlt}
-            title={imageAlt}
+            alt={imageAlt || 'Content Image'}
+            title={imageAlt || 'Content Image'}
             loading='lazy'
           />
         ) : (
@@ -50,8 +50,8 @@ const { imgSrc, reverseImg = false, class: className, imageAlt = '' }: Props = A
           <Image
             class='img-wrapper h-auto w-full rounded-lg'
             src={imgSrc}
-            alt={imageAlt}
-            title={imageAlt}
+            alt={imageAlt || 'Content Image'}
+            title={imageAlt || 'Content Image'}
             loading='lazy'
           />
         ) : (

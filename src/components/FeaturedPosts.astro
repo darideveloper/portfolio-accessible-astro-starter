@@ -73,6 +73,7 @@ const featuredPosts = data.slice(0, limit).map((post) => {
                 <Image
                   src={post.featuredImage}
                   alt={post.title}
+                  title={post.title}
                   width={800}
                   height={450}
                   class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'

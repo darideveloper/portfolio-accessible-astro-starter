@@ -83,8 +83,8 @@ import { whatsappLink } from '../lib/constants/contact'
       <Image
         class={`hidden lg:block ${animationsClasses.image}`}
         src={src}
-        alt={imageAlt}
-        title={imageAlt}
+        alt={imageAlt || 'Hero Image'}
+        title={imageAlt || 'Hero Image'}
         decoding='async'
         width={800}
         height={600}
