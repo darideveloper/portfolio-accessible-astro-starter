@@ -38,30 +38,30 @@ This is the **flagship starter theme** of the Accessible Astro ecosystem:
 1. **Install dependencies**:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. **Start dev server**:
 
    ```bash
-   npm run dev
+   pnpm dev
    # or
-   npm start
+   pnpm start
    ```
 
-   Server starts at `http://localhost:4321`
+   Server starts at `https://portfolio.localhost`
 
 3. **Build production site**:
 
    ```bash
-   npm run build
+   pnpm build
    ```
 
    Output: `./dist/`
 
 4. **Preview production build**:
    ```bash
-   npm run preview
+   pnpm preview
    ```
 
 ### Workspace Development (Symlinked Components)
@@ -78,9 +78,9 @@ This project can work with locally linked `accessible-astro-components`:
 
 ```bash
 cd ../accessible-astro-components
-npm link
+pnpm link
 cd ../accessible-astro-starter
-npm link accessible-astro-components
+pnpm link accessible-astro-components
 ```
 
 ## Code Style Guidelines
@@ -104,7 +104,7 @@ npm link accessible-astro-components
   - `prettier-plugin-astro`
   - `prettier-plugin-css-order`
   - `prettier-plugin-tailwindcss`
-- Run format manually: `npx prettier --write .`
+- Run format manually: `pnpm prettier --write .`
 
 ### Linting
 
@@ -112,7 +112,7 @@ npm link accessible-astro-components
   - `@typescript-eslint/eslint-plugin`
   - `eslint-plugin-astro`
   - `eslint-plugin-jsx-a11y` (strict accessibility rules)
-- Check manually: `npx eslint .`
+- Check manually: `pnpm eslint .`
 
 ### Styling
 
@@ -295,7 +295,7 @@ This is a **static site** (SSG) that can be deployed anywhere:
 ### Popular Options
 
 1. **Netlify**: Drop-in deployment
-   - Build command: `npm run build`
+   - Build command: `pnpm build`
    - Publish directory: `dist`
 
 2. **Vercel**: Zero-config deployment
@@ -307,7 +307,7 @@ This is a **static site** (SSG) that can be deployed anywhere:
    - Use GitHub Actions for CI/CD
 
 4. **Cloudflare Pages**: Fast global CDN
-   - Build command: `npm run build`
+   - Build command: `pnpm build`
    - Output directory: `dist`
 
 ### Build Configuration
@@ -315,6 +315,16 @@ This is a **static site** (SSG) that can be deployed anywhere:
 - Site URL configured in `astro.config.mjs`: `site: 'https://accessible-astro-starter.incluud.dev'`
 - Sitemap automatically generated via `@astrojs/sitemap`
 - Compressed HTML output for performance
+
+### Docker Deployment
+
+```bash
+docker compose up --build
+```
+
+- Requires Docker 23+ with BuildKit (default in modern Docker)
+- Environment variables (`API_TOKEN`, `API_BASE`, `SITE_URL`) are passed via `--build-arg` in `docker-compose.yml`
+- The Docker image uses `node:22-alpine` with `corepack` enabled — ensure your Docker host supports it
 
 ## Commit Guidelines
 
@@ -342,8 +352,8 @@ type(scope): subject
 
 - **Title format**: `[starter] Brief description`
 - **Check before submitting**:
-  - Run `npm run build` - no errors
-  - Check `npx eslint .` - no accessibility violations
+  - Run `pnpm build` - no errors
+  - Check `pnpm eslint .` - no accessibility violations
   - Test keyboard navigation
   - Verify no console errors
   - Check responsive design on mobile
@@ -368,10 +378,10 @@ type(scope): subject
 ### Build Failures
 
 1. Clear cache: `rm -rf node_modules/.astro node_modules/.vite`
-2. Reinstall: `rm -rf node_modules && npm install`
+2. Reinstall: `rm -rf node_modules && pnpm install`
 3. Check Node version compatibility (Node 18+)
 4. Verify all images exist in `public/` directory
-5. Check for TypeScript errors: `npx tsc --noEmit`
+5. Check for TypeScript errors: `pnpm tsc --noEmit`
 
 ### Content Collections Not Working
 

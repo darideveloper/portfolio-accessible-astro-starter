@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config'
 import { fileURLToPath } from 'url'
-import { existsSync, lstatSync } from 'fs'
-import { resolve } from 'path'
+import { existsSync, lstatSync, realpathSync } from 'fs'
+import { resolve, dirname } from 'path'
 import compress from 'astro-compress'
 import icon from 'astro-icon'
 import mdx from '@astrojs/mdx'
@@ -10,8 +10,11 @@ import tailwindcss from '@tailwindcss/vite'
 import { watch } from 'fs'
 
 // Check if we're using a symlinked/workspace setup
+// Only activate workspace mode if the actual workspace checkout exists
 const componentsPath = resolve('./node_modules/accessible-astro-components')
-const isLinked = existsSync(componentsPath) && lstatSync(componentsPath).isSymbolicLink()
+const isLinked = existsSync(componentsPath)
+  && lstatSync(componentsPath).isSymbolicLink()
+  && existsSync(resolve(dirname(realpathSync(componentsPath)), 'src/components'))
 
 // Base Vite config
 const viteConfig = {
@@ -88,7 +91,11 @@ if (isLinked) {
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
-  site: 'https://software3s.com',
+  site: process.env.SITE_URL || 'https://software3s.com',
+  server: {
+    port: process.env.PORT ? parseInt(process.env.PORT) : 4321,
+    strictPort: true,
+  },
   integrations: [compress(), icon(), mdx(), sitemap()],
   image: {
     domains: ['services.darideveloper.com'],

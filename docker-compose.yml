@@ -1,0 +1,10 @@
+services:
+  portfolio:
+    build:
+      context: .
+      args:
+        API_TOKEN: ${API_TOKEN}
+        API_BASE: ${API_BASE}
+        SITE_URL: ${SITE_URL:-https://software3s.com}
+    ports:
+      - "${PORT:-8080}:80"

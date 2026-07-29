@@ -7,8 +7,8 @@
   "type": "module",
   "homepage": "https://accessible-astro-starter.incluud.dev/",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "portless portfolio pnpm astro dev",
+    "start": "portless portfolio pnpm astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
@@ -32,6 +32,14 @@
   },
   "bugs": {
     "url": "https://github.com/incluud/accessible-astro-starter/issues"
+  },
+  "packageManager": "pnpm@10.18.3",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "sharp"
+    ]
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.5",
@@ -67,6 +75,6 @@
     "marked": "^17.0.1"
   },
   "engines": {
-    "node": ">=20.3.0"
+    "node": ">=22.12.0"
   }
 }
