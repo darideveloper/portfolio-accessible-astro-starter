@@ -5,6 +5,6 @@ services:
       args:
         API_TOKEN: ${API_TOKEN}
         API_BASE: ${API_BASE}
-        SITE_URL: ${SITE_URL:-https://software3s.com}
+        SITE_URL: ${SITE_URL:-https://darideveloper.com}
     ports:
       - "${PORT:-8080}:80"

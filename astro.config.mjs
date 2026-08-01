@@ -91,7 +91,7 @@ if (isLinked) {
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
-  site: process.env.SITE_URL || 'https://software3s.com',
+  site: process.env.SITE_URL || 'https://darideveloper.com',
   server: {
     port: process.env.PORT ? parseInt(process.env.PORT) : 4321,
     strictPort: true,

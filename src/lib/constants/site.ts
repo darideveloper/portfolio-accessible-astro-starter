@@ -1,9 +1,9 @@
 export const SITE = {
-  name: 'Smooth Software Solutions',
-  title: 'Smooth Software Solutions (3S)',
+  name: 'Dari Dev Team',
+  title: 'Dari Dev Team',
   description:
-    'Smooth Software Solutions is a software development company that specializes in building custom software solutions for businesses.',
-  url: import.meta.env.SITE_URL || 'https://software3s.com',
+    'Dari Dev Team is a software development company that specializes in building custom software solutions for businesses.',
+  url: import.meta.env.SITE_URL || 'https://darideveloper.com',
   author: 'DariDeveloper',
   twitter: '@DariDeveloper',
   defaultLanguage: 'en',
