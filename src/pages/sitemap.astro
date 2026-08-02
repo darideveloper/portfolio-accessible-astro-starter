@@ -3,9 +3,13 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import { Heading, Notification } from 'accessible-astro-components'
 import { getCollection } from 'astro:content'
+import { getBlogPostsForRoutes } from '../lib/blog'
 
 // Get all portafolio projects
 const projects = await getCollection('projects')
+
+// Get all blog posts
+const posts = await getBlogPostsForRoutes()
 
 // Define static pages with their descriptions
 const staticPages = [
@@ -144,7 +148,7 @@ const staticPages = [
           class='mb-6'
           >Blog</Heading
         >
-        <article>
+        <article class='mb-6'>
           <Heading
             level='h3'
             size='h6'
@@ -154,10 +158,10 @@ const staticPages = [
           </Heading>
           <p>
             Descubre artículos sobre accesibilidad web, mejores prácticas de desarrollo y diseño inclusivo. Nuestro blog
-            presenta contenido dinámico con paginación para una navegación sencilla.
+            presenta contenido híbrido desde la API y archivos locales con paginación para una navegación sencilla.
           </p>
           <div class='text-xs'>
-            <p>Características: Contenido dinámico desde la API de JSONPlaceholder</p>
+            <p>Características: Contenido híbrido desde la API y archivos MDX locales</p>
             <p>
               URL base: <code
                 class='rounded bg-neutral-100 px-1 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500'
@@ -172,6 +176,33 @@ const staticPages = [
             </p>
           </div>
         </article>
+        <div class='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+          {
+            posts.map((post) => (
+              <article>
+                <Heading
+                  level='h3'
+                  size='h6'
+                  class='mb-3'
+                >
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                </Heading>
+                <p class='mb-3'>{post.data.description}</p>
+                <div class='text-xs'>
+                  <p class='mb-1'>
+                    Por: <span class='font-medium'>{post.data.author}</span>
+                  </p>
+                  <p>
+                    URL:{' '}
+                    <code class='rounded bg-neutral-100 px-1 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500'>
+                      /blog/{post.id}
+                    </code>
+                  </p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>

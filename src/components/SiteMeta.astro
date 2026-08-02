@@ -73,7 +73,7 @@ const {
 } = Astro.props
 
 const fullTitle = `${title} - ${SITE.title}`
-const imageUrl = `${Astro.site}${image}`
+const imageUrl = new URL(image, Astro.site).href
 
 // JSON-LD Logic
 const schemas = []

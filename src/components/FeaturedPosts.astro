@@ -2,11 +2,12 @@
 import { Heading, Link } from 'accessible-astro-components'
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
+import { getBlogPosts } from '../lib/blog'
 
 /**
  * FeaturedPosts Component
  *
- * @description A component that displays featured blog posts from JSONPlaceholder API
+ * @description A component that displays the latest blog posts (from local MDX and the API, merged)
  */
 interface Props {
   /**
@@ -25,33 +26,9 @@ interface Props {
   title?: string
 }
 
-interface Post {
-  id: number
-  userId: number
-  title: string
-  body: string
-  featuredImage: string
-  shortUrl: string
-}
-
 const { class: className, limit = 3, title = 'Últimos posts' } = Astro.props
 
-import { getPosts } from '../lib/api'
-
-// Fetch posts from API
-const data = await getPosts('es')
-
-// Process and limit posts for featured section
-const featuredPosts = data.slice(0, limit).map((post) => {
-  return {
-    id: post.id,
-    title: post.title,
-    body: post.description,
-    featuredImage: post.banner_image_url,
-    shortUrl: post.slug,
-    author: post.author,
-  }
-})
+const featuredPosts = (await getBlogPosts()).slice(0, limit)
 ---
 
 <section class:list={[className, 'my-64']}>
@@ -66,14 +43,14 @@ const featuredPosts = data.slice(0, limit).map((post) => {
         featuredPosts.map((post) => (
           <article class='group flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900'>
             <a
-              href={'/blog/' + post.shortUrl}
+              href={'/blog/' + post.id}
               class='block'
             >
               <div class='relative h-48 w-full overflow-hidden'>
                 <Image
-                  src={post.featuredImage}
-                  alt={post.title}
-                  title={post.title}
+                  src={post.data.featuredImage}
+                  alt={post.data.title}
+                  title={post.data.title}
                   width={800}
                   height={450}
                   class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'
@@ -84,14 +61,16 @@ const featuredPosts = data.slice(0, limit).map((post) => {
             <div class='flex flex-1 flex-col p-6'>
               <h2 class='mb-2 text-xl font-semibold'>
                 <a
-                  href={'/blog/' + post.shortUrl}
+                  href={'/blog/' + post.id}
                   class='hover:text-brand-primary transition-colors duration-200 hover:underline'
                 >
-                  {post.title}
+                  {post.data.title}
                 </a>
               </h2>
-              <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>{post.body}</p>
-              <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>Author: {post.author}</footer>
+              <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>{post.data.description}</p>
+              <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>
+                Autor: {post.data.author}
+              </footer>
             </div>
           </article>
         ))

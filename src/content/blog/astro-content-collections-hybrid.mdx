@@ -1,0 +1,29 @@
+---
+title: 'Contenido híbrido con Astro Content Collections'
+description: 'Cómo combinar publicaciones del blog desde la API y desde archivos MDX locales en una sola colección, con prioridad para el contenido local.'
+publishDate: 2026-07-28
+updatedDate: 2026-07-29
+author: 'Dari Dev Team'
+keywords: 'astro, content collections, blog, mdx, ssg'
+tags: ['Astro', 'Content Collections', 'MDX', 'SSG']
+featuredImage: ../../assets/blog/accessible-components.webp
+lang: 'es'
+status: 'published'
+draft: false
+---
+
+## ¿Por qué contenido híbrido?
+
+Este sitio publica artículos tanto desde la API como desde archivos locales. Gracias a un **loader híbrido**, ambas fuentes se fusionan en una sola colección de contenido.
+
+### Ventajas
+
+- **Migración incremental**: un post puede moverse de la API a un archivo local uno a la vez.
+- **Build determinista**: si la API no responde, el sitio se construye igual con los posts locales.
+- **Misma estructura**: ambos orígenes comparten el mismo esquema, así que migrar es trivial.
+
+```js
+const posts = await getCollection('blog')
+```
+
+> El contenido local tiene prioridad sobre la API cuando el `slug` coincide.

@@ -3,40 +3,17 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import { Image } from 'astro:assets'
 import { Pagination } from 'accessible-astro-components'
-import type { PaginateFunction, Page } from 'astro'
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { getBlogPosts } from '../../lib/blog'
 
-interface Post {
-  id: number
-  userId: number
-  title: string
-  body: string
-  featuredImage: string
-  shortUrl: string
-  author: string
-}
-
-import { getPosts } from '../../lib/api'
-
-export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
-  const data = await getPosts('es')
-
-  const postsWithImages = data.map((post) => {
-    return {
-      id: post.id,
-      title: post.title,
-      body: post.description,
-      featuredImage: post.banner_image_url,
-      shortUrl: post.slug,
-      userId: 0, // Legacy field, keeping for type safety if needed, or I can remove it if I update the interface
-      author: post.author,
-    }
-  })
-
-  return paginate(postsWithImages, { pageSize: 6 })
-}
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getBlogPosts()
+  return paginate(posts, { pageSize: 6 })
+}) satisfies GetStaticPaths
 
 interface Props {
-  page: Page<Post>
+  page: Page<CollectionEntry<'blog'>>
 }
 
 const { page } = Astro.props as Props
@@ -63,14 +40,14 @@ const { page } = Astro.props as Props
             <li>
               <article class='group flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900'>
                 <a
-                  href={'/blog/' + post.shortUrl}
+                  href={'/blog/' + post.id}
                   class='block'
                 >
                   <div class='relative h-48 w-full overflow-hidden'>
                     <Image
-                      src={post.featuredImage}
-                      alt={post.title}
-                      title={post.title}
+                      src={post.data.featuredImage}
+                      alt={post.data.title}
+                      title={post.data.title}
                       width={800}
                       height={450}
                       class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'
@@ -81,14 +58,16 @@ const { page } = Astro.props as Props
                 <div class='flex flex-1 flex-col p-6'>
                   <h2 class='mb-2 text-xl font-semibold'>
                     <a
-                      href={'/blog/' + post.shortUrl}
+                      href={'/blog/' + post.id}
                       class='hover:text-brand-primary transition-colors duration-200 hover:underline'
                     >
-                      {post.title}
+                      {post.data.title}
                     </a>
                   </h2>
-                  <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>{post.body}</p>
-                  <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>Autor: {post.author}</footer>
+                  <p class='mb-4 flex-1 text-neutral-600 dark:text-neutral-400'>{post.data.description}</p>
+                  <footer class='mt-auto text-sm text-neutral-500 dark:text-neutral-400'>
+                    Autor: {post.data.author}
+                  </footer>
                 </div>
               </article>
             </li>

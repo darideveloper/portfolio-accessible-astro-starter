@@ -1,9 +1,7 @@
-# blog-integration Specification
+# blog-integration Delta
 
-## Purpose
-Integrate an external blog API with local MDX content, merging both sources into a single `blog` content collection so posts render through one pipeline with native Astro rendering and full SEO metadata.
+## MODIFIED Requirements
 
-## Requirements
 ### Requirement: External Blog Content Fetching
 The system SHALL fetch blog posts from the configured external API (via `API_BASE` env var) and merge them with local MDX posts into a single `blog` content collection. If the API is unreachable or returns an error during build, the system SHALL log a warning and continue the build with local posts only.
 
@@ -44,4 +42,3 @@ The system SHALL display the specific author, publication date, and banner image
 - **WHEN** a local post is displayed
 - **THEN** the author, `publishDate`, `keywords`, and `featuredImage` from frontmatter are shown
 - **AND** passed to the page's SEO metadata with the same behavior as API posts
-

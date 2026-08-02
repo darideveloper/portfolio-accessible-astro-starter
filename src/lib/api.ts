@@ -1,6 +1,4 @@
-import { marked } from 'marked'
-
-export interface Post {
+export interface ApiPost {
     id: number
     title: string
     slug: string
@@ -11,9 +9,29 @@ export interface Post {
     keywords: string
     author: string
     content: string
-    related_post: string
+    related_post: string | null
     created_at: string
     updated_at: string
+}
+
+/**
+ * Normalized blog post shape, mirroring the `blog` content collection schema
+ * so API and local MDX posts share the same structure.
+ */
+export interface BlogPostData {
+    title: string
+    description: string
+    publishDate: string
+    updatedDate?: string
+    author: string
+    keywords?: string
+    tags: string[]
+    featuredImage: string
+    lang: string
+    status: string
+    draft: boolean
+    relatedPost?: string
+    source: 'local' | 'api'
 }
 
 const API_BASE = import.meta.env.API_BASE || 'https://services.darideveloper.com'
@@ -26,9 +44,10 @@ if (!API_TOKEN) {
 /**
  * Fetch posts from the API
  * @param lang - Language code (default: 'es')
- * @returns Promise<Post[]>
+ * @returns Promise<ApiPost[]>
+ * @throws when the API request fails or returns a non-2xx response
  */
-export async function getPosts(lang: string = 'es'): Promise<Post[]> {
+export async function getPosts(lang: string = 'es'): Promise<ApiPost[]> {
     const customHeaders = new Headers()
     customHeaders.append('Accept-Language', lang)
     if (API_TOKEN) {
@@ -41,32 +60,38 @@ export async function getPosts(lang: string = 'es'): Promise<Post[]> {
         redirect: 'follow' as RequestRedirect,
     }
 
-    try {
-        const response = await fetch(`${API_BASE}/api/posts/?details=true`, requestOptions)
-        if (!response.ok) {
-            throw new Error(`API error: ${response.status} ${response.statusText}`)
-        }
-        const result = await response.json()
-        return result?.results as Post[]
-    } catch (error) {
-        console.error('Error fetching posts:', error)
-        return []
+    const response = await fetch(`${API_BASE}/api/posts/?details=true`, requestOptions)
+    if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`)
     }
+    const result = await response.json()
+    return result?.results as ApiPost[]
 }
 
 /**
- * Fetch a single post by slug
- * Note: The current API endpoint returns all posts, so we filter locally for now.
- * If there's a specific endpoint for single posts, it should be used here.
+ * Normalize an API post into the shared blog schema shape
  */
-export async function getPostBySlug(slug: string, lang: string = 'es'): Promise<Post | undefined> {
-    const posts = await getPosts(lang)
-    return posts.find((p) => p.slug === slug)
-}
+export function normalizeApiPost(post: ApiPost): BlogPostData {
+    const tags = post.keywords
+        ? post.keywords
+              .split(',')
+              .map((tag) => tag.trim())
+              .filter(Boolean)
+        : []
 
-/**
- * Convert Markdown to HTML
- */
-export async function markdownToHtml(markdown: string): Promise<string> {
-    return marked.parse(markdown) as string
+    return {
+        title: post.title,
+        description: post.description,
+        publishDate: post.created_at,
+        updatedDate: post.updated_at || undefined,
+        author: post.author,
+        keywords: post.keywords || undefined,
+        tags,
+        featuredImage: post.banner_image_url,
+        lang: post.lang || 'es',
+        status: post.status || 'published',
+        draft: false,
+        relatedPost: post.related_post || undefined,
+        source: 'api',
+    }
 }

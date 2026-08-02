@@ -2,54 +2,65 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import SocialShares from '@components/SocialShares.astro'
-import { getPosts, markdownToHtml } from '../../lib/api'
 import { Heading } from 'accessible-astro-components'
+import { render } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+import { getBlogPostsForRoutes } from '../../lib/blog'
 
 export async function getStaticPaths() {
-  const data = await getPosts('es')
+  const posts = await getBlogPostsForRoutes()
 
-  return data.map((post) => {
+  return posts.map((post) => {
     return {
-      params: { post: post.slug },
+      params: { post: post.id },
       props: { post },
     }
   })
 }
 
-const { post } = Astro.props
-const author = {
-  name: post.author,
-  image: '/logo-dari-dev-team-small.png', // Keeping default logo for now or could be empty
-  bio: '', // API doesn't provide bio yet
+interface Props {
+  post: CollectionEntry<'blog'>
 }
 
-const contentHtml = await markdownToHtml(post.content)
+const { post } = Astro.props
+const { Content } = await render(post)
+
+const author = {
+  name: post.data.author,
+  image: '/logo-dari-dev-team-small.png',
+  bio: '',
+}
+
+const featuredImage = typeof post.data.featuredImage === 'string' ? post.data.featuredImage : post.data.featuredImage.src
 ---
 
 <DefaultLayout
-  title={post.title}
-  description={post.description}
-  url={post.slug}
+  title={post.data.title}
+  description={post.data.description}
+  url={Astro.url.href}
   type='article'
+  publishDate={post.data.publishDate.toISOString()}
+  author={post.data.author}
+  keywords={post.data.keywords}
+  image={featuredImage}
   breadcrumbs={[
     { name: 'Home', item: Astro.site },
     { name: 'Blog', item: `${Astro.site}blog` },
-    { name: post.title, item: Astro.url.href },
+    { name: post.data.title, item: Astro.url.href },
   ]}
 >
   <PageHeader
-    title={post.title}
-    subtitle={post.description}
+    title={post.data.title}
+    subtitle={post.data.description}
     author={author}
     bgType='bordered'
-    featuredImage={post.banner_image_url}
+    featuredImage={post.data.featuredImage}
   />
   <section class='my-12'>
     <div class='narrow container'>
-      <div
-        class='post-content'
-        set:html={contentHtml}
-      />
+      <div class='post-content space-content'>
+        <Content />
+      </div>
     </div>
   </section>
   <section class='my-12'>
