@@ -50,3 +50,5 @@ docs/
 
 # ignore by default all hiden folders (like agents folders)
 .*/
+# but track project skills
+!.opencode/
